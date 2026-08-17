@@ -4,8 +4,8 @@
 {% block content %}
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
-        <h2 class="mb-1 fw-bold">
-            <i class="fa-solid fa-receipt text-emerald-400 me-2"></i>My Maintenance Bills
+        <h2 class="mb-1 fw-bold text-dark">
+            <i class="fa-solid fa-receipt text-primary me-2"></i>My Maintenance Bills
         </h2>
         <p class="text-muted mb-0 small">Payment history and outstanding dues</p>
     </div>
@@ -27,10 +27,10 @@
                 {% for bill in bills %}
                 <tr>
                     <td class="ps-4">
-                        <strong class="text-white">{{ bill.month }} {{ bill.year }}</strong>
+                        <strong class="text-dark">{{ bill.month }} {{ bill.year }}</strong>
                     </td>
                     <td>
-                        <span class="fw-bold text-white">₹{{ bill.amount }}</span>
+                        <span class="fw-bold text-dark">₹{{ bill.amount }}</span>
                         {% if bill.late_fine > 0 %}
                             <br><small class="text-danger">+ ₹{{ bill.late_fine }} late fee</small>
                         {% endif %}
@@ -47,7 +47,7 @@
                     </td>
                     <td>
                         {% if bill.is_paid %}
-                            <a href="{% url 'payment_receipt' bill.payment.id %}" class="btn btn-sm btn-outline-light py-1 px-3">
+                            <a href="{% url 'payment_receipt' bill.payment.id %}" class="btn btn-sm btn-outline-secondary py-1 px-3">
                                 <i class="fa-solid fa-file-invoice me-1"></i> Receipt
                             </a>
                         {% else %}

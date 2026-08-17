@@ -4,13 +4,13 @@
 {% block content %}
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
-        <h2 class="mb-1 fw-bold">
-            <i class="fa-solid fa-calendar-days text-purple-400 me-2"></i>Community Events
+        <h2 class="mb-1 fw-bold text-dark">
+            <i class="fa-solid fa-calendar-days text-primary me-2"></i>Community Events
         </h2>
         <p class="text-muted mb-0 small">Society celebrations, meetings, and gatherings</p>
     </div>
     <div class="d-flex gap-2">
-        <a href="{% url 'events:polls_list' %}" class="btn btn-outline-light btn-sm">
+        <a href="{% url 'events:polls_list' %}" class="btn btn-outline-secondary btn-sm">
             <i class="fa-solid fa-square-poll-vertical me-1"></i> Active Polls
         </a>
         {% if user.is_secretary %}
@@ -40,9 +40,9 @@
                     </span>
                 </div>
                 
-                <h4 class="fw-bold text-white mb-2">{{ event.title }}</h4>
+                <h4 class="fw-bold text-dark mb-2">{{ event.title }}</h4>
                 <p class="text-muted small mb-2">
-                    <i class="fa-solid fa-location-dot me-1 text-rose-400"></i>{{ event.venue }}
+                    <i class="fa-solid fa-location-dot me-1 text-danger"></i>{{ event.venue }}
                 </p>
                 <p class="card-text text-secondary mb-3">{{ event.description|truncatewords:30 }}</p>
             </div>

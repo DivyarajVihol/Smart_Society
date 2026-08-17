@@ -5,17 +5,17 @@
 <!-- Welcome Banner Header -->
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
-        <h2 class="mb-1 fw-bold">Welcome back, {{ user.get_full_name|default:user.username }}</h2>
+        <h2 class="mb-1 fw-bold text-dark">Welcome back, {{ user.get_full_name|default:user.username }}</h2>
         <p class="text-muted mb-0 small">
-            <i class="fa-solid fa-location-dot text-indigo-400 me-1"></i>
+            <i class="fa-solid fa-location-dot text-primary me-1"></i>
             Flat {{ user.flat|default:"Not Assigned" }} &bull; Resident Dashboard
         </p>
     </div>
     <div class="d-flex gap-2">
-        <a href="{% url 'visitors:create_gate_pass' %}" class="btn btn-primary btn-sm">
+        <a href="{% url 'visitors:create_gate_pass' %}" class="btn btn-warning btn-sm">
             <i class="fa-solid fa-ticket me-1"></i> Quick Pass
         </a>
-        <a href="{% url 'complaints:create' %}" class="btn btn-outline-light btn-sm">
+        <a href="{% url 'complaints:create' %}" class="btn btn-outline-danger btn-sm">
             <i class="fa-solid fa-plus me-1"></i> New Complaint
         </a>
     </div>
@@ -29,7 +29,7 @@
             <!-- Notices -->
             <div class="col">
                 <a href="{% url 'core:notices' %}" class="text-decoration-none d-block h-100">
-                    <div class="nav-card-modern" style="--card-glow: rgba(2, 132, 199, 0.2); --card-border-glow: rgba(2, 132, 199, 0.4);">
+                    <div class="nav-card-modern">
                         <div class="nav-icon-bubble bubble-notices">
                             <i class="fa-solid fa-bullhorn"></i>
                         </div>
@@ -42,7 +42,7 @@
             <!-- Complaints -->
             <div class="col">
                 <a href="{% url 'complaints:list' %}" class="text-decoration-none d-block h-100">
-                    <div class="nav-card-modern" style="--card-glow: rgba(244, 63, 94, 0.2); --card-border-glow: rgba(244, 63, 94, 0.4);">
+                    <div class="nav-card-modern">
                         <div class="nav-icon-bubble bubble-complaints">
                             <i class="fa-solid fa-screwdriver-wrench"></i>
                         </div>
@@ -55,7 +55,7 @@
             <!-- Events -->
             <div class="col">
                 <a href="{% url 'events:events_list' %}" class="text-decoration-none d-block h-100">
-                    <div class="nav-card-modern" style="--card-glow: rgba(139, 92, 246, 0.2); --card-border-glow: rgba(139, 92, 246, 0.4);">
+                    <div class="nav-card-modern">
                         <div class="nav-icon-bubble bubble-events">
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
@@ -68,7 +68,7 @@
             <!-- Directory -->
             <div class="col">
                 <a href="{% url 'core:directory' %}" class="text-decoration-none d-block h-100">
-                    <div class="nav-card-modern" style="--card-glow: rgba(13, 148, 136, 0.2); --card-border-glow: rgba(13, 148, 136, 0.4);">
+                    <div class="nav-card-modern">
                         <div class="nav-icon-bubble bubble-directory">
                             <i class="fa-solid fa-address-book"></i>
                         </div>
@@ -81,7 +81,7 @@
             <!-- Gate Passes -->
             <div class="col">
                 <a href="{% url 'visitors:my_gate_passes' %}" class="text-decoration-none d-block h-100">
-                    <div class="nav-card-modern" style="--card-glow: rgba(245, 158, 11, 0.2); --card-border-glow: rgba(245, 158, 11, 0.4);">
+                    <div class="nav-card-modern">
                         <div class="nav-icon-bubble bubble-passes">
                             <i class="fa-solid fa-id-badge"></i>
                         </div>
@@ -94,16 +94,16 @@
             <!-- My Bills -->
             <div class="col">
                 <a href="{% url 'my_bills' %}" class="text-decoration-none d-block h-100">
-                    <div class="nav-card-modern" style="--card-glow: rgba(16, 185, 129, 0.2); --card-border-glow: rgba(16, 185, 129, 0.4);">
+                    <div class="nav-card-modern">
                         <div class="nav-icon-bubble bubble-bills">
                             <i class="fa-solid fa-receipt"></i>
                         </div>
                         <h6 class="nav-card-title">My Bills</h6>
                         <p class="nav-card-desc">
                             {% if my_unpaid_bills_count > 0 %}
-                                <span class="text-danger fw-semibold">{{ my_unpaid_bills_count }} pending bill{{ my_unpaid_bills_count|pluralize }}</span>
+                                <span class="text-danger fw-bold">{{ my_unpaid_bills_count }} pending due</span>
                             {% else %}
-                                <span class="text-success fw-semibold">All dues paid</span>
+                                <span class="text-success fw-bold">All dues paid</span>
                             {% endif %}
                         </p>
                     </div>
@@ -118,7 +118,7 @@
         <div class="card p-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center gap-2">
-                    <i class="fa-solid fa-bullhorn text-sky-400"></i>
+                    <i class="fa-solid fa-bullhorn text-primary"></i>
                     <h6 class="fw-bold text-uppercase mb-0 small text-muted" style="letter-spacing: 0.05em;">Recent Notices</h6>
                 </div>
                 <a href="{% url 'core:notices' %}" class="btn btn-outline-primary btn-sm py-1 px-2" style="font-size: 0.75rem;">View All</a>
@@ -127,11 +127,11 @@
                 {% for notice in recent_notices %}
                 <div class="item-preview-card d-flex align-items-start gap-3">
                     <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
-                         style="width: 38px; height: 38px; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white;">
+                         style="width: 38px; height: 38px; background: var(--color-tint-blue); color: var(--color-primary-dark);">
                         <i class="fa-solid fa-scroll fa-sm"></i>
                     </div>
                     <div class="flex-grow-1 overflow-hidden">
-                        <p class="fw-semibold mb-0 text-white text-truncate" style="font-size: 0.88rem;">{{ notice.title }}</p>
+                        <p class="fw-bold mb-0 text-dark text-truncate" style="font-size: 0.88rem;">{{ notice.title }}</p>
                         <p class="text-muted mb-0 small" style="font-size: 0.75rem;">
                             <span class="badge bg-secondary me-1 py-0 px-2" style="font-size: 0.65rem;">{{ notice.get_category_display }}</span>
                             {{ notice.created_at|date:"M d, Y" }}
@@ -151,7 +151,7 @@
         <div class="card p-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center gap-2">
-                    <i class="fa-solid fa-calendar-days text-purple-400"></i>
+                    <i class="fa-solid fa-calendar-days text-primary"></i>
                     <h6 class="fw-bold text-uppercase mb-0 small text-muted" style="letter-spacing: 0.05em;">Upcoming Events</h6>
                 </div>
                 <a href="{% url 'events:events_list' %}" class="btn btn-outline-success btn-sm py-1 px-2" style="font-size: 0.75rem;">View All</a>
@@ -164,9 +164,9 @@
                         <span class="date-badge-month">{{ event.date|date:"M" }}</span>
                     </div>
                     <div class="overflow-hidden flex-grow-1">
-                        <p class="fw-semibold mb-0 text-white text-truncate" style="font-size: 0.88rem;">{{ event.title }}</p>
+                        <p class="fw-bold mb-0 text-dark text-truncate" style="font-size: 0.88rem;">{{ event.title }}</p>
                         <p class="text-muted mb-0 small" style="font-size: 0.75rem;">
-                            <i class="fa-solid fa-location-dot me-1 text-muted"></i>{{ event.venue }}
+                            <i class="fa-solid fa-location-dot me-1 text-danger"></i>{{ event.venue }}
                         </p>
                     </div>
                 </div>

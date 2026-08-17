@@ -4,13 +4,13 @@
 {% block content %}
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
-        <h2 class="mb-1 fw-bold">
-            <i class="fa-solid fa-square-poll-vertical text-sky-400 me-2"></i>Community Polls & Voting
+        <h2 class="mb-1 fw-bold text-dark">
+            <i class="fa-solid fa-square-poll-vertical text-primary me-2"></i>Community Polls & Voting
         </h2>
         <p class="text-muted mb-0 small">Make your voice heard in society decisions</p>
     </div>
     <div class="d-flex gap-2">
-        <a href="{% url 'events:events_list' %}" class="btn btn-outline-light btn-sm">
+        <a href="{% url 'events:events_list' %}" class="btn btn-outline-secondary btn-sm">
             <i class="fa-solid fa-calendar-days me-1"></i> Events
         </a>
         {% if user.is_secretary %}
@@ -27,7 +27,7 @@
         <div class="card p-4">
             <div class="d-flex justify-content-between align-items-start mb-3">
                 <div>
-                    <h5 class="fw-bold text-white mb-1">{{ poll.question }}</h5>
+                    <h5 class="fw-bold text-dark mb-1">{{ poll.question }}</h5>
                     <small class="text-muted">Initiated by Society Committee</small>
                 </div>
                 <small class="badge bg-secondary">
@@ -43,7 +43,7 @@
                             {% for option in poll.options.all %}
                             <label class="item-preview-card d-flex align-items-center cursor-pointer">
                                 <input type="radio" name="option_id" value="{{ option.id }}" class="form-check-input me-3 mt-0" required>
-                                <span class="text-white fw-semibold">{{ option.option_text }}</span>
+                                <span class="text-dark fw-bold">{{ option.option_text }}</span>
                             </label>
                             {% endfor %}
                         </div>
@@ -60,14 +60,14 @@
                         {% with total=poll.votes.count %}
                         <div class="item-preview-card p-3">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="text-white fw-semibold">{{ option.option_text }}</span>
+                                <span class="text-dark fw-bold">{{ option.option_text }}</span>
                                 <span class="badge bg-info">{{ option.votes.count }} vote{{ option.votes.count|pluralize }}</span>
                             </div>
-                            <div class="progress" style="height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px;">
+                            <div class="progress" style="height: 8px; background: #E5E7EB; border-radius: 4px;">
                                 <div class="progress-bar poll-bar" role="progressbar"
                                     data-votes="{{ option.votes.count }}"
                                     data-total="{{ total }}"
-                                    style="width: 0%; background: linear-gradient(90deg, #6366f1, #0ea5e9); border-radius: 4px;">
+                                    style="width: 0%; background: linear-gradient(90deg, #3B82F6, #2563EB); border-radius: 4px;">
                                 </div>
                             </div>
                         </div>

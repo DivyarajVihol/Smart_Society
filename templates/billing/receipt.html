@@ -6,21 +6,21 @@
     <div class="col-md-7 col-lg-6">
         <div class="card p-4 p-md-5" id="receiptCard">
             <div class="text-center mb-4">
-                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 72px; height: 72px; background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 72px; height: 72px; background: #D1FAE5; color: #059669; border: 1px solid #A7F3D0;">
                     <i class="fa-solid fa-circle-check fa-3x"></i>
                 </div>
-                <h3 class="fw-bold mb-1">Payment Successful</h3>
+                <h3 class="fw-bold mb-1 text-dark">Payment Successful</h3>
                 <p class="text-muted small">Official Smart Society Payment Receipt</p>
             </div>
             
             <div class="item-preview-card p-3 mb-4">
                 <div class="d-flex justify-content-between mb-2 small">
                     <span class="text-muted">Transaction Reference</span>
-                    <span class="fw-bold text-white font-monospace">{{ payment.transaction_id }}</span>
+                    <span class="fw-bold text-dark font-monospace">{{ payment.transaction_id }}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-2 small">
                     <span class="text-muted">Date & Time</span>
-                    <span class="text-white">{{ payment.payment_date|date:"d M Y, H:i" }}</span>
+                    <span class="text-dark">{{ payment.payment_date|date:"d M Y, H:i" }}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-2 small">
                     <span class="text-muted">Payment Channel</span>
@@ -28,21 +28,21 @@
                 </div>
                 <div class="d-flex justify-content-between mb-2 small">
                     <span class="text-muted">Billed Flat</span>
-                    <span class="text-white fw-semibold">Flat {{ payment.bill.flat }}</span>
+                    <span class="text-dark fw-bold">Flat {{ payment.bill.flat }}</span>
                 </div>
                 <div class="d-flex justify-content-between small">
                     <span class="text-muted">Billing Cycle</span>
-                    <span class="text-white">{{ payment.bill.month }} {{ payment.bill.year }}</span>
+                    <span class="text-dark">{{ payment.bill.month }} {{ payment.bill.year }}</span>
                 </div>
             </div>
             
-            <div class="p-3 rounded mb-4 d-flex justify-content-between align-items-center" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25);">
-                <span class="fw-bold text-white">Total Amount Paid</span>
+            <div class="p-3 rounded mb-4 d-flex justify-content-between align-items-center" style="background: #ECFDF5; border: 1px solid #A7F3D0;">
+                <span class="fw-bold text-dark">Total Amount Paid</span>
                 <span class="fs-4 fw-bold text-success">₹{{ payment.bill.amount|add:payment.bill.late_fine }}</span>
             </div>
             
             <div class="d-flex justify-content-between align-items-center">
-                <a href="{% url 'my_bills' %}" class="btn btn-outline-light">
+                <a href="{% url 'my_bills' %}" class="btn btn-outline-secondary">
                     <i class="fa-solid fa-arrow-left me-1"></i> Back to Bills
                 </a>
                 <button onclick="window.print()" class="btn btn-primary">

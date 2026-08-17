@@ -4,12 +4,12 @@
 {% block content %}
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
-        <h2 class="mb-1 fw-bold">
-            <i class="fa-solid fa-users text-indigo-400 me-2"></i>Resident Directory & Roster
+        <h2 class="mb-1 fw-bold text-dark">
+            <i class="fa-solid fa-users text-primary me-2"></i>Resident Directory & Roster
         </h2>
         <p class="text-muted mb-0 small">Registered community residents</p>
     </div>
-    <a href="{% url 'dashboard' %}" class="btn btn-outline-light btn-sm">
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-sm">
         <i class="fa-solid fa-arrow-left me-1"></i> Back to Dashboard
     </a>
 </div>
@@ -31,14 +31,14 @@
                     <td class="ps-4 py-3">
                         <div class="d-flex align-items-center">
                             {% if resident.profile_photo %}
-                                <img src="{{ resident.profile_photo.url }}" alt="Profile" class="rounded-circle me-3 border border-secondary object-fit-cover" style="width: 44px; height: 44px;">
+                                <img src="{{ resident.profile_photo.url }}" alt="Profile" class="rounded-circle me-3 border border-2 border-white shadow-sm object-fit-cover" style="width: 44px; height: 44px;">
                             {% else %}
-                                <div class="rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">
+                                <div class="rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: var(--color-tint-blue); color: var(--color-primary-dark);">
                                     <i class="fa-solid fa-user"></i>
                                 </div>
                             {% endif %}
                             <div>
-                                <h6 class="mb-0 fw-bold text-white">{{ resident.get_full_name|default:resident.username }}</h6>
+                                <h6 class="mb-0 fw-bold text-dark">{{ resident.get_full_name|default:resident.username }}</h6>
                                 <small class="text-muted">@{{ resident.username }}</small>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                     </td>
                     <td>
                         {% if resident.flat %}
-                            <span class="badge bg-secondary"><i class="fa-solid fa-door-open me-1 text-indigo-400"></i>Flat {{ resident.flat }}</span>
+                            <span class="badge bg-secondary"><i class="fa-solid fa-door-open me-1 text-primary"></i>Flat {{ resident.flat }}</span>
                         {% else %}
                             <span class="badge bg-secondary text-muted opacity-75">Unassigned</span>
                         {% endif %}

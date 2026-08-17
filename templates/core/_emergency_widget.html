@@ -1,7 +1,7 @@
 <div class="card p-4 h-100">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div class="d-flex align-items-center gap-2">
-            <i class="fa-solid fa-phone-volume text-rose-400"></i>
+            <i class="fa-solid fa-phone-volume text-danger"></i>
             <h6 class="fw-bold text-uppercase mb-0 small text-muted" style="letter-spacing: 0.05em;">Emergency Contacts</h6>
         </div>
         <a href="{% url 'core:directory' %}" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size:0.75rem;">Full Directory</a>
@@ -12,15 +12,15 @@
         <div class="item-preview-card d-flex align-items-center gap-3">
             <div class="flex-shrink-0">
                 {% if contact.profile_photo %}
-                    <img src="{{ contact.profile_photo.url }}" class="rounded-circle border border-secondary" style="width: 42px; height: 42px; object-fit: cover;" alt="Profile">
+                    <img src="{{ contact.profile_photo.url }}" class="rounded-circle border border-2 border-white shadow-sm" style="width: 42px; height: 42px; object-fit: cover;" alt="Profile">
                 {% else %}
-                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3);">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA;">
                         <i class="fa-solid {% if contact.role == 'SECRETARY' %}fa-user-tie{% else %}fa-shield-halved{% endif %}"></i>
                     </div>
                 {% endif %}
             </div>
             <div class="flex-grow-1 overflow-hidden">
-                <p class="fw-semibold text-white mb-0 text-truncate" style="font-size:0.88rem;">{{ contact.get_full_name|default:contact.username }}</p>
+                <p class="fw-bold text-dark mb-0 text-truncate" style="font-size:0.88rem;">{{ contact.get_full_name|default:contact.username }}</p>
                 <p class="text-muted mb-0 small" style="font-size:0.75rem;">
                     {{ contact.get_role_display }}
                     {% if contact.is_on_duty %}

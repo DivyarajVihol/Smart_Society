@@ -4,8 +4,8 @@
 {% block content %}
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
-        <h2 class="mb-1 fw-bold">
-            <i class="fa-solid fa-bullhorn text-sky-400 me-2"></i>Official Notice Board
+        <h2 class="mb-1 fw-bold text-dark">
+            <i class="fa-solid fa-bullhorn text-primary me-2"></i>Official Notice Board
         </h2>
         <p class="text-muted mb-0 small">Society announcements, maintenance schedules, and circulars</p>
     </div>
@@ -27,7 +27,7 @@
                         <i class="fa-regular fa-clock me-1"></i>{{ notice.created_at|date:"d M Y" }}
                     </small>
                 </div>
-                <h5 class="fw-bold text-white mb-2">{{ notice.title }}</h5>
+                <h5 class="fw-bold text-dark mb-2">{{ notice.title }}</h5>
                 <p class="card-text text-secondary mb-3">{{ notice.description|linebreaks }}</p>
             </div>
             

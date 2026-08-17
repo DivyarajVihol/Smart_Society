@@ -5,23 +5,23 @@
 <div class="row justify-content-center mt-4">
     <div class="col-md-8 col-lg-6">
         <!-- Profile Card -->
-        <div class="card border-0 shadow-lg overflow-hidden">
-            <!-- Top Banner/Header -->
-            <div class="p-5 text-center position-relative" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);">
+        <div class="card overflow-hidden">
+            <!-- Top Banner/Header (Palette 08 Primary Blue) -->
+            <div class="p-5 text-center position-relative" style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);">
                 <div class="position-relative">
                     {% if user.profile_photo %}
                         <img src="{{ user.profile_photo.url }}" alt="Profile Photo" 
-                             class="rounded-circle border border-4 border-white shadow-lg mb-3" 
-                             style="width: 120px; height: 120px; object-fit: cover;">
+                             class="rounded-circle border border-4 border-white shadow mb-3" 
+                             style="width: 110px; height: 110px; object-fit: cover;">
                     {% else %}
-                        <div class="rounded-circle bg-white d-inline-flex align-items-center justify-content-center border border-4 border-white shadow-lg mb-3"
-                             style="width: 120px; height: 120px;">
+                        <div class="rounded-circle bg-white d-inline-flex align-items-center justify-content-center border border-4 border-white shadow mb-3"
+                             style="width: 110px; height: 110px;">
                             <i class="fa-solid fa-user fa-3x text-primary" style="opacity: 0.85;"></i>
                         </div>
                     {% endif %}
                     
                     <h3 class="text-white fw-bold mb-1">{{ user.get_full_name|default:user.username }}</h3>
-                    <span class="badge bg-secondary rounded-pill px-3 py-1" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                    <span class="badge bg-light text-dark px-3 py-1" style="font-size: 0.75rem; letter-spacing: 0.5px;">
                         {{ user.get_role_display }} Portal
                     </span>
                 </div>
@@ -32,19 +32,19 @@
                 <div class="row g-4">
                     <div class="col-sm-6">
                         <label class="form-label">Username</label>
-                        <p class="h6 fw-semibold text-white mb-0">{{ user.username }}</p>
+                        <p class="h6 fw-bold text-dark mb-0">{{ user.username }}</p>
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label">Email Address</label>
-                        <p class="h6 fw-semibold text-white mb-0">{{ user.email|default:"Not provided" }}</p>
+                        <p class="h6 fw-bold text-dark mb-0">{{ user.email|default:"Not provided" }}</p>
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label">Phone Number</label>
-                        <p class="h6 fw-semibold text-white mb-0">{{ user.phone|default:"Not provided" }}</p>
+                        <p class="h6 fw-bold text-dark mb-0">{{ user.phone|default:"Not provided" }}</p>
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label">Flat / Unit</label>
-                        <p class="h6 fw-semibold text-white mb-0">
+                        <p class="h6 fw-bold text-dark mb-0">
                             {% if user.flat %}
                                 Flat {{ user.flat }}
                             {% else %}

@@ -4,12 +4,12 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="mb-1 fw-bold">
-            <i class="fa-solid fa-id-badge text-amber-400 me-2"></i>Create Visitor Gate Pass
+        <h2 class="mb-1 fw-bold text-dark">
+            <i class="fa-solid fa-id-badge text-warning me-2"></i>Create Visitor Gate Pass
         </h2>
         <p class="text-muted mb-0 small">Authorize temporary guests or recurring staff entries</p>
     </div>
-    <a href="{% url 'visitors:my_gate_passes' %}" class="btn btn-outline-light btn-sm">
+    <a href="{% url 'visitors:my_gate_passes' %}" class="btn btn-outline-secondary btn-sm">
         <i class="fa-solid fa-arrow-left me-1"></i> Back to Passes
     </a>
 </div>
@@ -20,11 +20,11 @@
         <label class="d-block text-decoration-none" id="label-temp">
             <input type="radio" name="pass_type_select" value="TEMPORARY" id="radio-temp" class="d-none" checked>
             <div class="nav-card-modern p-4 text-center" id="card-temp"
-                 style="--card-glow: rgba(245, 158, 11, 0.3); border-color: rgba(245, 158, 11, 0.5) !important;">
+                 style="border-color: var(--color-primary) !important; background: var(--color-tint-blue) !important;">
                 <div class="nav-icon-bubble bubble-passes mx-auto mb-2" style="width: 48px; height: 48px; font-size: 1.25rem;">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                 </div>
-                <h5 class="text-white fw-bold mb-1">Temporary Pass</h5>
+                <h5 class="text-dark fw-bold mb-1">Temporary Pass</h5>
                 <p class="text-muted small mb-0">Valid on a single specified day for one-time guests, deliveries, or contractors.</p>
             </div>
         </label>
@@ -32,12 +32,11 @@
     <div class="col-md-6">
         <label class="d-block text-decoration-none" id="label-perm">
             <input type="radio" name="pass_type_select" value="PERMANENT" id="radio-perm" class="d-none">
-            <div class="nav-card-modern p-4 text-center" id="card-perm"
-                 style="--card-glow: rgba(139, 92, 246, 0.3);">
+            <div class="nav-card-modern p-4 text-center" id="card-perm">
                 <div class="nav-icon-bubble bubble-events mx-auto mb-2" style="width: 48px; height: 48px; font-size: 1.25rem;">
                     <i class="fa-solid fa-key"></i>
                 </div>
-                <h5 class="text-white fw-bold mb-1">Permanent Pass</h5>
+                <h5 class="text-dark fw-bold mb-1">Permanent Pass</h5>
                 <p class="text-muted small mb-0">Always valid recurring pass for family members, domestic help, or daily drivers.</p>
             </div>
         </label>
@@ -70,7 +69,7 @@
         </div>
 
         <div class="mt-4 d-flex justify-content-between align-items-center">
-            <a href="{% url 'visitors:my_gate_passes' %}" class="btn btn-outline-light">
+            <a href="{% url 'visitors:my_gate_passes' %}" class="btn btn-outline-secondary">
                 <i class="fa-solid fa-arrow-left me-1"></i> Cancel
             </a>
             <button type="submit" class="btn btn-warning">
@@ -96,11 +95,15 @@
             hiddenInput.value = isPerm ? 'PERMANENT' : 'TEMPORARY';
 
             if (isPerm) {
-                cardTemp.style.borderColor = 'var(--border-subtle)';
-                cardPerm.style.borderColor = 'rgba(139, 92, 246, 0.6)';
+                cardTemp.style.borderColor = 'var(--border-card)';
+                cardTemp.style.background = '#FFFFFF';
+                cardPerm.style.borderColor = 'var(--color-primary)';
+                cardPerm.style.background = 'var(--color-tint-blue)';
             } else {
-                cardTemp.style.borderColor = 'rgba(245, 158, 11, 0.6)';
-                cardPerm.style.borderColor = 'var(--border-subtle)';
+                cardTemp.style.borderColor = 'var(--color-primary)';
+                cardTemp.style.background = 'var(--color-tint-blue)';
+                cardPerm.style.borderColor = 'var(--border-card)';
+                cardPerm.style.background = '#FFFFFF';
             }
             dateField.style.display = isPerm ? 'none' : 'block';
         });
