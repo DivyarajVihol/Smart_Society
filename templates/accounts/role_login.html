@@ -4,7 +4,7 @@
 {% block title %}Sign In - {{ role_title }} | Smart Society{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center mt-4 animate-fade-in">
+<div class="row justify-content-center align-items-center mt-3 mb-5 animate-fade-in">
     <div class="col-md-6 col-lg-5">
         <div class="card p-4 p-md-5">
             <div class="text-center mb-4">
@@ -17,8 +17,8 @@
                         <i class="fa-solid fa-shield-halved"></i>
                     {% endif %}
                 </div>
-                <h2 class="fw-bold mb-1 text-white">{{ role_title }} Portal</h2>
-                <p class="text-muted small">Sign in to your Smart Society account</p>
+                <h2 class="fw-bold mb-1 text-white">{{ role_title }} Sign In</h2>
+                <p class="text-muted small mb-0">Enter your credentials to access your portal</p>
             </div>
             
             <form method="post">
@@ -42,9 +42,9 @@
                 </div>
             </form>
             
-            <div class="text-center mt-4">
-                <p class="mb-2 text-muted small">Don't have an account? <a href="{% url 'role_signup' role_param %}" class="fw-semibold text-cyan">Register here</a></p>
-                <p class="mb-0 small"><a href="{% url 'landing' %}" class="text-muted"><i class="fa-solid fa-arrow-left me-1"></i>Back to Role Selection</a></p>
+            <div class="text-center mt-4 pt-3 border-top" style="border-color: var(--border-subtle) !important;">
+                <p class="mb-2 text-muted small">New member? <a href="{% url 'role_signup' role_param %}" class="fw-semibold text-cyan">Create an account &rarr;</a></p>
+                <p class="mb-0 small"><a href="{% url 'landing' %}" class="text-muted"><i class="fa-solid fa-arrow-left me-1"></i>Back to Universal Login</a></p>
             </div>
         </div>
     </div>

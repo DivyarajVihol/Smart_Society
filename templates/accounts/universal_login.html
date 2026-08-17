@@ -4,58 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Smart Society</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Sign In &bull; Smart Society</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome 6 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg-deep: #0f131a;
-            --bg-panel: #161c26;
-            --accent-purple: #7c3aed;
-            --accent-purple-hover: #6d28d9;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #2d3748;
-            --input-bg: #1e2532;
+            --bg-canvas: #070A12;
+            --bg-panel: #0D1321;
+            --bg-input: rgba(15, 23, 42, 0.85);
+            --bg-input-focus: #111A2E;
             
-            --accent-resident: #0f766e;
-            --accent-guard: #c2410c;
-            --accent-secretary: #4338ca;
+            --color-cyan: #06B6D4;
+            --color-cyan-glow: rgba(6, 182, 212, 0.4);
+            --color-emerald: #10B981;
+            --color-emerald-glow: rgba(16, 185, 129, 0.4);
+            --color-amber: #F59E0B;
+            --color-amber-glow: rgba(245, 158, 11, 0.4);
+            --color-iris: #6366F1;
+
+            --text-primary: #FFFFFF;
+            --text-secondary: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-subtle: rgba(255, 255, 255, 0.09);
+            --border-highlight: rgba(255, 255, 255, 0.16);
+
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-full: 9999px;
+            --transition-bounce: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            height: 100vh;
+            background-color: var(--bg-canvas);
+            color: var(--text-secondary);
+            min-height: 100vh;
             display: flex;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        /* --- Left Panel (Imagery) --- */
+        /* --- Left Showcase Panel --- */
         .left-panel {
-            width: 50%;
+            width: 52%;
             height: 100vh;
             position: relative;
-            background: url('/media/backgrounds/signup_bg.png') no-repeat center center;
+            background: url('{% static "images/hero_architecture.jpg" %}') no-repeat center center;
             background-size: cover;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 3rem;
+            padding: 3.5rem;
         }
 
         .left-panel::after {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(rgba(15, 19, 26, 0.4), rgba(15, 19, 26, 0.7));
+            background: linear-gradient(135deg, rgba(7, 10, 18, 0.65) 0%, rgba(7, 10, 18, 0.9) 100%);
             z-index: 1;
         }
 
@@ -64,313 +81,449 @@
             z-index: 2;
         }
 
-        .logo-section {
-            display: flex;
+        .brand-badge-top {
+            display: inline-flex;
             align-items: center;
             gap: 12px;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--accent-purple);
+        .brand-icon-box {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #06B6D4, #3B82F6);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .back-pill {
-            position: absolute;
-            top: 3rem;
-            right: 3rem;
-            padding: 0.6rem 1.2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 999px;
             color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
+            font-size: 1.25rem;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
         }
 
-        .back-pill:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-5px);
+        .brand-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.03em;
         }
 
-        .tagline-section {
-            max-width: 400px;
+        .hero-floating-card {
+            background: rgba(13, 19, 33, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            max-width: 480px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        .tagline-section h2 {
-            font-size: 2.8rem;
+        .hero-floating-card h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
             line-height: 1.2;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.03em;
         }
 
-        /* --- Right Panel (Form) --- */
+        .hero-floating-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-stats-row {
+            display: flex;
+            gap: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .stat-item h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-cyan);
+            margin-bottom: 2px;
+        }
+
+        .stat-item small {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        /* --- Right Auth Panel --- */
         .right-panel {
-            width: 50%;
+            width: 48%;
             height: 100vh;
             background-color: var(--bg-panel);
-            padding: 4rem 10% 2rem 10%;
+            padding: 3.5rem 10% 2.5rem 10%;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             overflow-y: auto;
+            position: relative;
         }
 
         .form-header {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .form-header h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.4rem;
         }
 
         .form-header p {
             color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
         .form-header a {
-            color: var(--accent-purple);
+            color: var(--color-cyan);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            transition: color var(--transition-fast);
         }
 
-        /* Role Selector Styles */
-        .role-selector {
-            background: var(--input-bg);
-            border: 1.5px solid var(--border-color);
-            border-radius: 14px;
+        .form-header a:hover {
+            color: white;
+        }
+
+        /* Role Switcher Pill Bar */
+        .role-switch-container {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
             display: flex;
-            padding: 0.4rem;
+            padding: 5px;
             position: relative;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
-        .role-btn {
+        .role-tab-btn {
             flex: 1;
             background: none;
             border: none;
             color: var(--text-muted);
-            padding: 0.75rem;
+            padding: 0.75rem 0.5rem;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.88rem;
             position: relative;
-            z-index: 1;
-            transition: all 0.3s ease;
+            z-index: 2;
+            transition: all var(--transition-fast);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
-        .role-btn.active {
+        .role-tab-btn.active {
             color: white;
         }
 
-        .role-slider {
+        .role-slider-indicator {
             position: absolute;
-            top: 0.35rem;
-            left: 0.35rem;
-            bottom: 0.35rem;
-            width: calc((100% - 0.7rem) / 3);
-            background: var(--accent-purple);
-            border-radius: 10px;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+            top: 5px;
+            left: 5px;
+            bottom: 5px;
+            width: calc((100% - 10px) / 3);
+            border-radius: 8px;
+            transition: transform var(--transition-bounce), background var(--transition-fast), box-shadow var(--transition-fast);
             pointer-events: none;
+            z-index: 1;
         }
 
-        [data-role="RESIDENT"] .role-slider { transform: translateX(0); background: var(--accent-resident); box-shadow: 0 4px 15px rgba(15, 118, 110, 0.3); }
-        [data-role="GUARD"] .role-slider { transform: translateX(100%); background: var(--accent-guard); box-shadow: 0 4px 15px rgba(194, 65, 12, 0.3); }
-        [data-role="SECRETARY"] .role-slider { transform: translateX(200%); background: var(--accent-secretary); box-shadow: 0 4px 15px rgba(67, 56, 202, 0.3); }
+        /* Role Active Dynamic States */
+        body[data-role="RESIDENT"] .role-slider-indicator {
+            transform: translateX(0);
+            background: linear-gradient(135deg, #10B981, #059669);
+            box-shadow: 0 0 20px var(--color-emerald-glow);
+        }
+        body[data-role="GUARD"] .role-slider-indicator {
+            transform: translateX(100%);
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            box-shadow: 0 0 20px var(--color-amber-glow);
+        }
+        body[data-role="SECRETARY"] .role-slider-indicator {
+            transform: translateX(200%);
+            background: linear-gradient(135deg, #06B6D4, #3B82F6);
+            box-shadow: 0 0 20px var(--color-cyan-glow);
+        }
 
+        /* Form Inputs */
         .form-grid {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.35rem;
         }
 
         .form-group {
             position: relative;
         }
 
-        .input-field {
+        .input-box {
             width: 100%;
-            background: var(--input-bg);
-            border: 1.5px solid var(--border-color);
-            border-radius: 10px;
-            padding: 1.2rem 1rem 0.6rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.15rem 1rem 0.55rem;
             color: white;
-            font-size: 1rem;
+            font-size: 0.96rem;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all var(--transition-fast);
         }
 
         .floating-label {
             position: absolute;
             left: 1rem;
-            top: 1rem;
+            top: 0.95rem;
             color: var(--text-muted);
+            font-size: 0.92rem;
             transition: all 0.2s ease;
             pointer-events: none;
-            font-size: 1rem;
         }
 
-        .input-field:focus ~ .floating-label,
-        .input-field:not(:placeholder-shown) ~ .floating-label {
-            top: 0.4rem;
-            font-size: 0.75rem;
-            color: var(--accent-purple);
+        .input-box:focus ~ .floating-label,
+        .input-box:not(:placeholder-shown) ~ .floating-label {
+            top: 0.35rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .input-field:focus {
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        body[data-role="RESIDENT"] .input-box:focus {
+            border-color: var(--color-emerald);
+            background: var(--bg-input-focus);
+            box-shadow: 0 0 0 3px var(--color-emerald-glow);
+        }
+        body[data-role="RESIDENT"] .input-box:focus ~ .floating-label { color: var(--color-emerald); }
+
+        body[data-role="GUARD"] .input-box:focus {
+            border-color: var(--color-amber);
+            background: var(--bg-input-focus);
+            box-shadow: 0 0 0 3px var(--color-amber-glow);
+        }
+        body[data-role="GUARD"] .input-box:focus ~ .floating-label { color: var(--color-amber); }
+
+        body[data-role="SECRETARY"] .input-box:focus {
+            border-color: var(--color-cyan);
+            background: var(--bg-input-focus);
+            box-shadow: 0 0 0 3px var(--color-cyan-glow);
+        }
+        body[data-role="SECRETARY"] .input-box:focus ~ .floating-label { color: var(--color-cyan); }
+
+        .password-toggle-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color var(--transition-fast);
         }
 
-        .login-btn {
+        .password-toggle-icon:hover {
+            color: white;
+        }
+
+        /* Submit Button */
+        .submit-auth-btn {
             width: 100%;
-            padding: 1rem;
-            background-color: var(--accent-purple);
+            padding: 0.95rem;
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            border-radius: var(--radius-md);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
+            transition: all var(--transition-fast);
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .login-btn:hover {
+        body[data-role="RESIDENT"] .submit-auth-btn {
+            background: linear-gradient(135deg, #10B981, #059669);
+            box-shadow: 0 4px 18px var(--color-emerald-glow);
+        }
+        body[data-role="GUARD"] .submit-auth-btn {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            box-shadow: 0 4px 18px var(--color-amber-glow);
+        }
+        body[data-role="SECRETARY"] .submit-auth-btn {
+            background: linear-gradient(135deg, #06B6D4, #3B82F6);
+            box-shadow: 0 4px 18px var(--color-cyan-glow);
+        }
+
+        .submit-auth-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
+            filter: brightness(1.1);
         }
 
-        .forgot-pass {
-            display: block;
-            text-align: right;
-            margin-top: 0.75rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .forgot-pass:hover {
-            color: white;
-        }
-
-        .alert-error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-            padding: 0.75rem;
-            border-radius: 8px;
+        /* Alert */
+        .auth-alert-error {
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #FB7185;
+            padding: 0.85rem 1.1rem;
+            border-radius: var(--radius-md);
             margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            display: none;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* --- Responsive --- */
         @media (max-width: 1024px) {
             .left-panel { display: none; }
-            .right-panel { width: 100%; padding: 4rem 15%; }
+            .right-panel { width: 100%; padding: 4rem 12%; }
+        }
+
+        @media (max-width: 576px) {
+            .right-panel { padding: 3rem 6%; }
         }
     </style>
 </head>
 <body data-role="RESIDENT">
 
+    <!-- Left Architectural Hero Showcase -->
     <div class="left-panel">
-        <div class="logo-section">
-            <div class="logo-icon">S</div>
-            <span class="logo-text">Smart Society</span>
-        </div>
+        <a href="/" class="brand-badge-top">
+            <div class="brand-icon-box">
+                <i class="fa-solid fa-bolt-lightning"></i>
+            </div>
+            <span class="brand-title">Smart Society</span>
+        </a>
 
-        <a href="/" class="back-pill">Back to home &rarr;</a>
-
-        <div class="tagline-section">
+        <div class="hero-floating-card">
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-cyan); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-sparkles me-1"></i> Autonomous Smart Living
+            </span>
             <h2>Seamless Living, Smarter Communities.</h2>
+            <p>Instant digital gate passes, automated maintenance billing, real-time ticket escalation, and society governance in one unified platform.</p>
+            
+            <div class="hero-stats-row">
+                <div class="stat-item">
+                    <h4>99.8%</h4>
+                    <small>On-Time Dues</small>
+                </div>
+                <div class="stat-item">
+                    <h4 style="color: var(--color-emerald);">24/7</h4>
+                    <small>Gate Security</small>
+                </div>
+                <div class="stat-item">
+                    <h4 style="color: var(--color-amber);">1,200+</h4>
+                    <small>Active Residents</small>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Right Authentication Panel -->
     <div class="right-panel">
         <div class="form-header">
-            <h1>Login to Portal</h1>
-            <p>New member? <a href="#" id="dynamicSignupLink">Create an account</a></p>
+            <h1 id="dynamicHeading">Resident Sign In</h1>
+            <p>New member? <a href="#" id="dynamicSignupLink">Create an account &rarr;</a></p>
         </div>
 
-        <div class="role-selector">
-            <div class="role-slider"></div>
-            <button type="button" class="role-btn active" onclick="setRole('RESIDENT')">Resident</button>
-            <button type="button" class="role-btn" onclick="setRole('GUARD')">Guard</button>
-            <button type="button" class="role-btn" onclick="setRole('SECRETARY')">Secretary</button>
+        <!-- Interactive Role Switcher -->
+        <div class="role-switch-container">
+            <div class="role-slider-indicator"></div>
+            <button type="button" class="role-tab-btn active" onclick="setRole('RESIDENT')">
+                <i class="fa-solid fa-house-laptop"></i> Resident
+            </button>
+            <button type="button" class="role-tab-btn" onclick="setRole('GUARD')">
+                <i class="fa-solid fa-shield-halved"></i> Guard
+            </button>
+            <button type="button" class="role-tab-btn" onclick="setRole('SECRETARY')">
+                <i class="fa-solid fa-user-tie"></i> Secretary
+            </button>
         </div>
 
         {% if messages %}
             {% for message in messages %}
-                <div class="alert-error" style="display: block;">
-                    {{ message }}
+                <div class="auth-alert-error">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>{{ message }}</div>
                 </div>
             {% endfor %}
         {% endif %}
 
+        <!-- Universal Login Form -->
         <form method="POST" id="loginForm" class="form-grid">
             {% csrf_token %}
             <input type="hidden" name="role" id="roleInput" value="RESIDENT">
             
             <div class="form-group">
-                <input type="text" name="username" class="input-field" placeholder=" " required id="id_username">
+                <input type="text" name="username" class="input-box" placeholder=" " required id="id_username">
                 <label class="floating-label" for="id_username">Username</label>
             </div>
 
             <div class="form-group">
-                <input type="password" name="password" class="input-field" placeholder=" " required id="id_password">
+                <input type="password" name="password" class="input-box" placeholder=" " required id="id_password">
                 <label class="floating-label" for="id_password">Password</label>
+                <i class="fa-regular fa-eye password-toggle-icon" id="togglePassword"></i>
             </div>
 
-            <a href="#" class="forgot-pass">Forgot Password?</a>
-
-            <button type="submit" class="login-btn" id="submitBtn">Sign In</button>
+            <button type="submit" class="submit-auth-btn" id="submitBtn">
+                <i class="fa-solid fa-right-to-bracket"></i> Sign In to Portal
+            </button>
         </form>
     </div>
 
     <script>
-        const roleLabels = {
-            'RESIDENT': { title: 'Resident', signup: '/signup/resident/' },
-            'GUARD': { title: 'Security Guard', signup: '/signup/guard/' },
-            'SECRETARY': { title: 'Secretary', signup: '/signup/secretary/' }
+        const roleConfig = {
+            'RESIDENT': { title: 'Resident Sign In', signup: '/signup/resident/' },
+            'GUARD': { title: 'Security Guard Sign In', signup: '/signup/guard/' },
+            'SECRETARY': { title: 'Secretary Sign In', signup: '/signup/secretary/' }
         };
 
         function setRole(role) {
             document.body.setAttribute('data-role', role);
             document.getElementById('roleInput').value = role;
-            
-            // Update Active Buttons
-            document.querySelectorAll('.role-btn').forEach(btn => {
+            document.getElementById('dynamicHeading').innerText = roleConfig[role].title;
+            document.getElementById('dynamicSignupLink').href = roleConfig[role].signup;
+
+            // Toggle active button class
+            document.querySelectorAll('.role-tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if(btn.textContent.toUpperCase() === (role === 'GUARD' ? 'GUARD' : role)) {
+                if (btn.textContent.toUpperCase().includes(role === 'GUARD' ? 'GUARD' : role)) {
                     btn.classList.add('active');
                 }
             });
-
-            // Update Signup Link
-            document.getElementById('dynamicSignupLink').href = roleLabels[role].signup;
         }
 
-        // Initialize first role selection
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('id_password');
+        togglePassword.addEventListener('click', function() {
+            const isPassword = passwordInput.getAttribute('type') === 'password';
+            passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Initialize default role
         setRole('RESIDENT');
     </script>
 </body>
