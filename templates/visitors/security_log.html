@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}Security Guard Console - Smart Society{% endblock %}
+{% block title %}Security Console - Smart Society{% endblock %}
 
 {% block content %}
 
 <!-- Header -->
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 animate-fade-in">
     <div>
-        <h2 class="mb-1 fw-bold text-dark">
-            <i class="fa-solid fa-shield-halved text-warning me-2"></i>Gate Security Console
+        <h2 class="mb-1 fw-bold text-white">
+            <i class="fa-solid fa-shield-halved text-amber me-2"></i>Gate Security Command Station
         </h2>
-        <p class="text-muted mb-0 small">Guard Station &bull; Live Visitor & Gate Pass Verification</p>
+        <p class="text-muted mb-0 small">Guard Post Alpha &bull; Live Perimeter & Gate Pass Verification</p>
     </div>
     <a href="{% url 'visitors:create_visitor' %}" class="btn btn-warning">
         <i class="fa-solid fa-user-plus me-1"></i> Log New Visitor
@@ -17,34 +17,34 @@
 </div>
 
 <!-- Stat Cards Row -->
-<div class="row g-3 mb-4">
+<div class="row g-3 mb-4 animate-fade-in">
     <div class="col-6 col-md-3">
-        <div class="card p-3 text-center h-100" style="background: var(--color-tint-blue) !important; border-color: var(--color-soft-blue) !important;">
+        <div class="card p-3 text-center h-100" style="background: rgba(6, 182, 212, 0.12) !important; border-color: rgba(6, 182, 212, 0.4) !important;">
             <p class="text-muted small fw-bold text-uppercase mb-1" style="font-size:0.7rem; letter-spacing:0.07em;">Currently Inside</p>
-            <h2 class="text-dark fw-bold mb-0">{{ active_count }}</h2>
+            <h2 class="text-cyan fw-bold mb-0">{{ active_count }}</h2>
         </div>
     </div>
     <div class="col-6 col-md-3">
-        <div class="card p-3 text-center h-100" style="background: #D1FAE5 !important; border-color: #A7F3D0 !important;">
+        <div class="card p-3 text-center h-100" style="background: rgba(16, 185, 129, 0.12) !important; border-color: rgba(16, 185, 129, 0.4) !important;">
             <p class="text-muted small fw-bold text-uppercase mb-1" style="font-size:0.7rem; letter-spacing:0.07em;">Total Visitors Today</p>
-            <h2 class="text-dark fw-bold mb-0">{{ total_today }}</h2>
+            <h2 class="text-emerald fw-bold mb-0">{{ total_today }}</h2>
         </div>
     </div>
     <div class="col-6 col-md-3">
-        <div class="card p-3 text-center h-100" style="background: #FEF3C7 !important; border-color: #FDE68A !important;">
+        <div class="card p-3 text-center h-100" style="background: rgba(245, 158, 11, 0.12) !important; border-color: rgba(245, 158, 11, 0.4) !important;">
             <p class="text-muted small fw-bold text-uppercase mb-1" style="font-size:0.7rem; letter-spacing:0.07em;">Temp Passes Today</p>
-            <h2 class="text-dark fw-bold mb-0">{{ temp_pass_count }}</h2>
+            <h2 class="text-amber fw-bold mb-0">{{ temp_pass_count }}</h2>
         </div>
     </div>
     <div class="col-6 col-md-3">
-        <div class="card p-3 text-center h-100" style="background: #EDE9FE !important; border-color: #DDD6FE !important;">
+        <div class="card p-3 text-center h-100" style="background: rgba(99, 102, 241, 0.12) !important; border-color: rgba(99, 102, 241, 0.4) !important;">
             <p class="text-muted small fw-bold text-uppercase mb-1" style="font-size:0.7rem; letter-spacing:0.07em;">Permanent Passes</p>
-            <h2 class="text-dark fw-bold mb-0">{{ perm_pass_count }}</h2>
+            <h2 class="text-white fw-bold mb-0">{{ perm_pass_count }}</h2>
         </div>
     </div>
 </div>
 
-<div class="row g-4">
+<div class="row g-4 animate-fade-in">
     <!-- LEFT: Visitor Log -->
     <div class="col-lg-7 d-flex flex-column gap-4">
 
@@ -53,7 +53,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-2">
                     <span class="role-pill-dot" style="background: #10B981;"></span>
-                    <h6 class="fw-bold mb-0 text-dark">Currently Inside Society</h6>
+                    <h6 class="fw-bold mb-0 text-white">Currently Inside Campus</h6>
                 </div>
                 <span class="badge bg-success">{{ active_count }} Active</span>
             </div>
@@ -72,12 +72,12 @@
                         {% for v in active_visitors %}
                         <tr>
                             <td class="ps-4">
-                                <span class="fw-bold text-dark">{{ v.name }}</span>
+                                <span class="fw-bold text-white">{{ v.name }}</span>
                                 <br><small class="text-muted">{{ v.purpose }}</small>
                             </td>
                             <td><span class="badge bg-secondary">Flat {{ v.flat }}</span></td>
                             <td><span class="badge bg-info">{{ v.get_visitor_type_display }}</span></td>
-                            <td><i class="fa-regular fa-clock me-1 text-muted"></i>{{ v.entry_time|time:"H:i" }}</td>
+                            <td><i class="fa-regular fa-clock me-1 text-cyan"></i>{{ v.entry_time|time:"H:i" }}</td>
                             <td>
                                 <form method="post" action="{% url 'visitors:checkout_visitor' v.id %}">
                                     {% csrf_token %}
@@ -98,8 +98,8 @@
         <!-- All Visitors Today -->
         <div class="card">
             <div class="card-header">
-                <h6 class="fw-bold mb-0 text-dark">
-                    <i class="fa-solid fa-clipboard-list text-primary me-2"></i>All Visitors Log Today
+                <h6 class="fw-bold mb-0 text-white">
+                    <i class="fa-solid fa-clipboard-list text-cyan me-2"></i>All Visitors Log Today
                 </h6>
             </div>
             <div class="table-responsive">
@@ -116,7 +116,7 @@
                     <tbody>
                         {% for v in all_visitors_today %}
                         <tr>
-                            <td class="ps-4 fw-bold text-dark">{{ v.name }}</td>
+                            <td class="ps-4 fw-bold text-white">{{ v.name }}</td>
                             <td>Flat {{ v.flat }}</td>
                             <td><span class="badge bg-secondary">{{ v.get_visitor_type_display }}</span></td>
                             <td>{{ v.entry_time|time:"H:i" }}</td>
@@ -144,8 +144,8 @@
         <!-- Today's Temporary Passes -->
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="fw-bold mb-0 text-dark">
-                    <i class="fa-solid fa-clock-rotate-left text-warning me-2"></i>Temporary Passes — Today
+                <h6 class="fw-bold mb-0 text-white">
+                    <i class="fa-solid fa-clock-rotate-left text-amber me-2"></i>Temporary Passes — Today
                 </h6>
                 <span class="badge bg-warning">{{ temp_pass_count }}</span>
             </div>
@@ -153,9 +153,9 @@
                 {% for p in today_temp_passes %}
                 <div class="item-preview-card d-flex justify-content-between align-items-start">
                     <div>
-                        <p class="fw-bold text-dark mb-0">{{ p.visitor_name }}</p>
+                        <p class="fw-bold text-white mb-0">{{ p.visitor_name }}</p>
                         <small class="text-muted">{{ p.purpose|default:"Visitor" }} &bull; Flat {{ p.flat }}</small>
-                        {% if p.phone %}<br><small class="text-muted"><i class="fa-solid fa-phone fa-xs me-1"></i>{{ p.phone }}</small>{% endif %}
+                        {% if p.phone %}<br><small class="text-muted"><i class="fa-solid fa-phone fa-xs me-1 text-cyan"></i>{{ p.phone }}</small>{% endif %}
                     </div>
                     <span class="badge bg-warning">Today</span>
                 </div>
@@ -170,8 +170,8 @@
         <!-- Active Permanent Passes -->
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="fw-bold mb-0 text-dark">
-                    <i class="fa-solid fa-key text-primary me-2"></i>Active Permanent Passes
+                <h6 class="fw-bold mb-0 text-white">
+                    <i class="fa-solid fa-key text-cyan me-2"></i>Active Permanent Passes
                 </h6>
                 <span class="badge bg-info">{{ perm_pass_count }}</span>
             </div>
@@ -179,9 +179,9 @@
                 {% for p in permanent_passes %}
                 <div class="item-preview-card d-flex justify-content-between align-items-start">
                     <div>
-                        <p class="fw-bold text-dark mb-0">{{ p.visitor_name }}</p>
+                        <p class="fw-bold text-white mb-0">{{ p.visitor_name }}</p>
                         <small class="text-muted">{{ p.purpose|default:"Regular Staff" }} &bull; Flat {{ p.flat }}</small>
-                        {% if p.phone %}<br><small class="text-muted"><i class="fa-solid fa-phone fa-xs me-1"></i>{{ p.phone }}</small>{% endif %}
+                        {% if p.phone %}<br><small class="text-muted"><i class="fa-solid fa-phone fa-xs me-1 text-cyan"></i>{{ p.phone }}</small>{% endif %}
                     </div>
                     <span class="badge bg-success">Always Valid</span>
                 </div>

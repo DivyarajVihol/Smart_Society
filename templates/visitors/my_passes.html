@@ -2,23 +2,23 @@
 {% block title %}My Gate Passes - Smart Society{% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 animate-fade-in">
     <div>
-        <h2 class="mb-1 fw-bold text-dark">
-            <i class="fa-solid fa-id-badge text-warning me-2"></i>My Gate Passes
+        <h2 class="mb-1 fw-bold text-white">
+            <i class="fa-solid fa-id-badge text-amber me-2"></i>My Digital Gate Passes
         </h2>
-        <p class="text-muted mb-0 small">Permanent and temporary visitor entry permits</p>
+        <p class="text-muted mb-0 small">Permanent authorizations & single-day guest entry passes</p>
     </div>
     <a href="{% url 'visitors:create_gate_pass' %}" class="btn btn-warning">
-        <i class="fa-solid fa-plus me-1"></i> Create New Pass
+        <i class="fa-solid fa-plus me-1"></i> Issue New Pass
     </a>
 </div>
 
 <!-- PERMANENT PASSES -->
-<div class="mb-5">
+<div class="mb-5 animate-fade-in">
     <div class="d-flex align-items-center gap-2 mb-3">
-        <i class="fa-solid fa-key text-primary"></i>
-        <h5 class="fw-bold mb-0 text-dark">Permanent Passes</h5>
+        <i class="fa-solid fa-key text-cyan"></i>
+        <h5 class="fw-bold mb-0 text-white">Permanent Passes</h5>
         <span class="badge bg-success ms-2">Always Valid</span>
     </div>
     <div class="row g-3">
@@ -27,11 +27,11 @@
             <div class="card h-100 p-3 {% if not p.is_active %}opacity-50{% endif %}">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div class="d-flex align-items-center gap-2">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;background:#EDE9FE; color:#6D28D9;">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;background:rgba(99, 102, 241, 0.2); color:#A5B4FC; border: 1px solid rgba(99, 102, 241, 0.4);">
                             <i class="fa-solid fa-user-check"></i>
                         </div>
                         <div>
-                            <h6 class="fw-bold mb-0 text-dark">{{ p.visitor_name }}</h6>
+                            <h6 class="fw-bold mb-0 text-white">{{ p.visitor_name }}</h6>
                             <small class="text-muted">{{ p.purpose|default:"Regular Access" }}</small>
                         </div>
                     </div>
@@ -42,16 +42,16 @@
                     {% endif %}
                 </div>
                 {% if p.phone %}
-                    <p class="mb-1 small text-muted"><i class="fa-solid fa-phone me-1"></i>{{ p.phone }}</p>
+                    <p class="mb-1 small text-muted"><i class="fa-solid fa-phone me-1 text-cyan"></i>{{ p.phone }}</p>
                 {% endif %}
-                <p class="mb-3 small text-muted"><i class="fa-regular fa-calendar me-1"></i>Issued {{ p.created_at|date:"M d, Y" }}</p>
+                <p class="mb-3 small text-muted"><i class="fa-regular fa-calendar me-1 text-emerald"></i>Issued {{ p.created_at|date:"M d, Y" }}</p>
                 
                 {% if p.is_active %}
                 <form method="post" action="{% url 'visitors:cancel_permanent_pass' p.id %}" class="mt-auto">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-sm btn-outline-danger w-100"
                         onclick="return confirm('Cancel permanent pass for {{ p.visitor_name }}?')">
-                        <i class="fa-solid fa-ban me-1"></i> Cancel Pass
+                        <i class="fa-solid fa-ban me-1"></i> Revoke Pass
                     </button>
                 </form>
                 {% endif %}
@@ -61,7 +61,7 @@
         <div class="col-12">
             <div class="card text-center py-4">
                 <i class="fa-solid fa-id-card fa-3x text-muted mb-2 opacity-50"></i>
-                <p class="text-muted mb-0 small">No permanent passes created yet. Add one for family members or regular household staff.</p>
+                <p class="text-muted mb-0 small">No permanent passes created yet. Add one for family members or recurring household staff.</p>
             </div>
         </div>
         {% endfor %}
@@ -69,10 +69,10 @@
 </div>
 
 <!-- TEMPORARY PASSES -->
-<div>
+<div class="animate-fade-in">
     <div class="d-flex align-items-center gap-2 mb-3">
-        <i class="fa-solid fa-clock-rotate-left text-warning"></i>
-        <h5 class="fw-bold mb-0 text-dark">Temporary Passes</h5>
+        <i class="fa-solid fa-clock-rotate-left text-amber"></i>
+        <h5 class="fw-bold mb-0 text-white">Temporary Passes</h5>
         <span class="badge bg-warning ms-2">Day Specific</span>
     </div>
     <div class="card">
@@ -90,12 +90,12 @@
                 <tbody>
                     {% for p in temp_passes %}
                     <tr>
-                        <td class="ps-4 fw-bold text-dark">{{ p.visitor_name }}</td>
+                        <td class="ps-4 fw-bold text-white">{{ p.visitor_name }}</td>
                         <td>{{ p.phone|default:"—" }}</td>
                         <td><span class="badge bg-secondary">{{ p.purpose|default:"Visitor" }}</span></td>
                         <td>
                             {% if p.expected_date %}
-                                <i class="fa-regular fa-calendar me-1 text-muted"></i>{{ p.expected_date|date:"M d, Y" }}
+                                <i class="fa-regular fa-calendar me-1 text-cyan"></i>{{ p.expected_date|date:"M d, Y" }}
                             {% else %}—{% endif %}
                         </td>
                         <td>

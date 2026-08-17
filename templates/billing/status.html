@@ -2,19 +2,19 @@
 {% block title %}Billing Status Tracker - Smart Society{% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 animate-fade-in">
     <div>
-        <h2 class="mb-1 fw-bold text-dark">
-            <i class="fa-solid fa-file-invoice-dollar text-primary me-2"></i>Billing Status Tracker
+        <h2 class="mb-1 fw-bold text-white">
+            <i class="fa-solid fa-file-invoice-dollar text-cyan me-2"></i>Building Invoices Tracker
         </h2>
-        <p class="text-muted mb-0 small">Society-wide maintenance payment ledger</p>
+        <p class="text-muted mb-0 small">Society-wide maintenance payment ledger across all units</p>
     </div>
     <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-sm">
         <i class="fa-solid fa-arrow-left me-1"></i> Back to Dashboard
     </a>
 </div>
 
-<div class="card">
+<div class="card animate-fade-in">
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead>
@@ -29,13 +29,13 @@
             <tbody>
                 {% for bill in bills %}
                 <tr>
-                    <td class="ps-4 py-3 fw-bold text-dark">
-                        <i class="fa-solid fa-door-closed text-primary me-2"></i>Flat {{ bill.flat }}
+                    <td class="ps-4 py-3 fw-bold text-white">
+                        <i class="fa-solid fa-door-closed text-cyan me-2"></i>Flat {{ bill.flat }}
                     </td>
                     <td>
                         {% if bill.flat.residents.all %}
                             {% for res in bill.flat.residents.all %}
-                                <div class="mb-1 text-dark fw-bold">{{ res.get_full_name|default:res.username }}</div>
+                                <div class="mb-1 text-white fw-bold">{{ res.get_full_name|default:res.username }}</div>
                             {% endfor %}
                         {% else %}
                             <span class="text-muted fst-italic">Unassigned</span>
@@ -43,10 +43,10 @@
                     </td>
                     <td>
                         <span class="badge bg-secondary">
-                            <i class="fa-regular fa-calendar me-1"></i>{{ bill.month }} {{ bill.year }}
+                            <i class="fa-regular fa-calendar me-1 text-cyan"></i>{{ bill.month }} {{ bill.year }}
                         </span>
                     </td>
-                    <td class="fw-bold text-dark">
+                    <td class="fw-bold text-white">
                         ₹{{ bill.amount }}
                     </td>
                     <td>

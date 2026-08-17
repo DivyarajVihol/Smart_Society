@@ -4,7 +4,7 @@
 {% block title %}Sign In - {{ role_title }} | Smart Society{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center mt-4">
+<div class="row justify-content-center mt-4 animate-fade-in">
     <div class="col-md-6 col-lg-5">
         <div class="card p-4 p-md-5">
             <div class="text-center mb-4">
@@ -12,12 +12,12 @@
                     {% if role_param == 'secretary' %}
                         <i class="fa-solid fa-user-tie"></i>
                     {% elif role_param == 'resident' %}
-                        <i class="fa-solid fa-house-chimney-user"></i>
+                        <i class="fa-solid fa-house-laptop"></i>
                     {% else %}
                         <i class="fa-solid fa-shield-halved"></i>
                     {% endif %}
                 </div>
-                <h2 class="fw-bold mb-1">{{ role_title }} Portal</h2>
+                <h2 class="fw-bold mb-1 text-white">{{ role_title }} Portal</h2>
                 <p class="text-muted small">Sign in to your Smart Society account</p>
             </div>
             
@@ -43,7 +43,7 @@
             </form>
             
             <div class="text-center mt-4">
-                <p class="mb-2 text-muted small">Don't have an account? <a href="{% url 'role_signup' role_param %}" class="fw-semibold">Register here</a></p>
+                <p class="mb-2 text-muted small">Don't have an account? <a href="{% url 'role_signup' role_param %}" class="fw-semibold text-cyan">Register here</a></p>
                 <p class="mb-0 small"><a href="{% url 'landing' %}" class="text-muted"><i class="fa-solid fa-arrow-left me-1"></i>Back to Role Selection</a></p>
             </div>
         </div>

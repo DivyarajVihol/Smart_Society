@@ -2,16 +2,16 @@
 {% block title %}My Bills - Smart Society{% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 animate-fade-in">
     <div>
-        <h2 class="mb-1 fw-bold text-dark">
-            <i class="fa-solid fa-receipt text-primary me-2"></i>My Maintenance Bills
+        <h2 class="mb-1 fw-bold text-white">
+            <i class="fa-solid fa-receipt text-emerald me-2"></i>My Maintenance Invoices
         </h2>
-        <p class="text-muted mb-0 small">Payment history and outstanding dues</p>
+        <p class="text-muted mb-0 small">Society maintenance payment history & pending dues</p>
     </div>
 </div>
 
-<div class="card">
+<div class="card animate-fade-in">
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead>
@@ -27,12 +27,12 @@
                 {% for bill in bills %}
                 <tr>
                     <td class="ps-4">
-                        <strong class="text-dark">{{ bill.month }} {{ bill.year }}</strong>
+                        <strong class="text-white">{{ bill.month }} {{ bill.year }}</strong>
                     </td>
                     <td>
-                        <span class="fw-bold text-dark">₹{{ bill.amount }}</span>
+                        <span class="fw-bold text-white">₹{{ bill.amount }}</span>
                         {% if bill.late_fine > 0 %}
-                            <br><small class="text-danger">+ ₹{{ bill.late_fine }} late fee</small>
+                            <br><small class="text-danger">+ ₹{{ bill.late_fine }} late surcharge</small>
                         {% endif %}
                     </td>
                     <td>
@@ -40,9 +40,13 @@
                     </td>
                     <td>
                         {% if bill.is_paid %}
-                            <span class="badge bg-success">Paid</span>
+                            <span class="badge bg-success">
+                                <i class="fa-solid fa-circle-check me-1"></i> Paid
+                            </span>
                         {% else %}
-                            <span class="badge bg-danger">Pending</span>
+                            <span class="badge bg-danger">
+                                <i class="fa-solid fa-clock me-1"></i> Pending
+                            </span>
                         {% endif %}
                     </td>
                     <td>
@@ -60,7 +64,7 @@
                 {% empty %}
                 <tr>
                     <td colspan="5" class="text-center py-5 text-muted">
-                        <i class="fa-regular fa-circle-check fa-3x mb-3 opacity-50"></i>
+                        <i class="fa-regular fa-circle-check fa-3x mb-3 text-emerald opacity-50"></i>
                         <p class="mb-0">No maintenance bills found for your flat.</p>
                     </td>
                 </tr>

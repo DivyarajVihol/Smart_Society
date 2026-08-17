@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
-{% block title %}File Complaint - Smart Society{% endblock %}
+{% block title %}File Ticket - Smart Society{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center mt-3">
+<div class="row justify-content-center mt-3 animate-fade-in">
     <div class="col-md-8 col-lg-7">
         <div class="card p-4 p-md-5">
             <div class="d-flex align-items-center gap-3 mb-4">
-                <div class="nav-icon-bubble bubble-complaints mb-0" style="width: 46px; height: 46px; font-size: 1.2rem;">
+                <div class="nav-icon-bubble bubble-complaints mb-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
                 <div>
-                    <h3 class="fw-bold mb-0 text-dark">File a Service Complaint</h3>
-                    <p class="text-muted small mb-0">Notify the society committee of maintenance issues</p>
+                    <h3 class="fw-bold mb-0 text-white">File Service Ticket</h3>
+                    <p class="text-muted small mb-0">Notify society management of maintenance or repair needs</p>
                 </div>
             </div>
             
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label class="form-label">Complaint Title</label>
-                    <input type="text" name="title" class="form-control" placeholder="E.g., Water leakage in corridor / Lift not functioning" required>
+                    <label class="form-label">Ticket Subject</label>
+                    <input type="text" name="title" class="form-control" placeholder="E.g., Corridor light flickering / Water pressure low" required>
                 </div>
                 
                 <div class="row mb-3 g-3">
@@ -39,7 +39,7 @@
                 
                 <div class="mb-4">
                     <label class="form-label">Detailed Description</label>
-                    <textarea name="description" rows="4" class="form-control" required placeholder="Describe the location, severity, and details of the problem..."></textarea>
+                    <textarea name="description" rows="4" class="form-control" required placeholder="Describe the location, urgency, and exact issue details..."></textarea>
                 </div>
                 
                 <div class="d-flex justify-content-between align-items-center">
@@ -47,7 +47,7 @@
                         <i class="fa-solid fa-arrow-left me-1"></i> Cancel
                     </a>
                     <button type="submit" class="btn btn-danger">
-                        <i class="fa-solid fa-paper-plane me-1"></i> Submit Complaint
+                        <i class="fa-solid fa-paper-plane me-1"></i> Submit Ticket
                     </button>
                 </div>
             </form>

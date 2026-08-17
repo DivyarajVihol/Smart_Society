@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
-{% block title %}Notice Board - Smart Society{% endblock %}
+{% block title %}Official Notice Board - Smart Society{% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 animate-fade-in">
     <div>
-        <h2 class="mb-1 fw-bold text-dark">
-            <i class="fa-solid fa-bullhorn text-primary me-2"></i>Official Notice Board
+        <h2 class="mb-1 fw-bold text-white">
+            <i class="fa-solid fa-bullhorn text-cyan me-2"></i>Official Notice Board
         </h2>
-        <p class="text-muted mb-0 small">Society announcements, maintenance schedules, and circulars</p>
+        <p class="text-muted mb-0 small">Society circulars, maintenance schedules, and public announcements</p>
     </div>
     {% if user.is_secretary %}
         <a href="{% url 'core:create_notice' %}" class="btn btn-primary">
-            <i class="fa-solid fa-plus me-1"></i> Post New Notice
+            <i class="fa-solid fa-plus me-1"></i> Broadcast Notice
         </a>
     {% endif %}
 </div>
 
-<div class="row g-4">
+<div class="row g-4 animate-fade-in">
     {% for notice in notices %}
     <div class="col-md-6">
         <div class="card h-100 p-4 d-flex flex-column justify-content-between">
@@ -24,25 +24,25 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <span class="badge bg-info">{{ notice.get_category_display }}</span>
                     <small class="text-muted">
-                        <i class="fa-regular fa-clock me-1"></i>{{ notice.created_at|date:"d M Y" }}
+                        <i class="fa-regular fa-clock me-1 text-cyan"></i>{{ notice.created_at|date:"d M Y" }}
                     </small>
                 </div>
-                <h5 class="fw-bold text-dark mb-2">{{ notice.title }}</h5>
+                <h5 class="fw-bold text-white mb-2">{{ notice.title }}</h5>
                 <p class="card-text text-secondary mb-3">{{ notice.description|linebreaks }}</p>
             </div>
             
             <div class="card-footer bg-transparent p-0 pt-3 d-flex justify-content-between align-items-center border-top">
                 <small class="text-muted">
-                    <i class="fa-solid fa-user-tie me-1"></i>
+                    <i class="fa-solid fa-user-tie me-1 text-cyan"></i>
                     {% if notice.created_by %}
                         {{ notice.created_by.get_full_name|default:notice.created_by.username }}
                     {% else %}
-                        Management Committee
+                        Executive Committee
                     {% endif %}
                 </small>
                 {% if notice.attachment %}
                     <a href="{{ notice.attachment.url }}" target="_blank" class="btn btn-sm btn-outline-primary py-1 px-2" style="font-size:0.78rem;">
-                        <i class="fa-solid fa-paperclip me-1"></i> Attachment
+                        <i class="fa-solid fa-paperclip me-1"></i> View Attachment
                     </a>
                 {% endif %}
             </div>

@@ -1,34 +1,63 @@
 {% extends 'base.html' %}
-{% block title %}Welcome to Smart Society - Modern Community Platform{% endblock %}
+{% load static %}
+{% block title %}Smart Society - Next-Gen Autonomous Housing Management{% endblock %}
 
 {% block content %}
-<div class="landing-hero-section">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 text-center mb-5">
-            <span class="landing-pill">
-                <i class="fa-solid fa-sparkles"></i> Next-Gen Housing Society Platform
+<div class="landing-hero-section animate-fade-in">
+    <!-- Hero Headline -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-9 text-center">
+            <span class="landing-pill float-animation">
+                <i class="fa-solid fa-sparkles text-cyan"></i> Intelligent Residential Operating System
             </span>
-            <h1 class="display-4 fw-extrabold mb-3 text-dark">
-                Smart Living, <span style="color: var(--color-primary-dark);">Effortlessly Managed</span>
+            <h1 class="display-3 fw-extrabold mb-3 text-white">
+                Next-Gen Living, <span style="background: linear-gradient(135deg, #22D3EE 0%, #10B981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Seamlessly Connected</span>
             </h1>
-            <p class="lead text-muted mx-auto" style="max-width: 650px;">
-                Connect residents, committee executives, and gate security seamlessly with real-time gate passes, online billing, maintenance complaints, and instant notices.
+            <p class="lead text-muted mx-auto" style="max-width: 680px; font-size: 1.15rem;">
+                Experience instantaneous QR gate passes, automated maintenance billing, real-time ticket escalation, and society governance in one unified platform.
             </p>
         </div>
     </div>
 
-    <!-- Role Selection Cards -->
+    <!-- 3D Architecture Visual Showcase -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+            <div class="hero-showcase-container position-relative">
+                <img src="{% static 'images/hero_architecture.jpg' %}" alt="Smart Society Eco-Towers" class="hero-image-cover">
+                
+                <!-- Floating Stats Bar Overlay -->
+                <div class="hero-floating-stat">
+                    <div class="text-center">
+                        <h4 class="fw-bold mb-0 text-cyan">99.8%</h4>
+                        <small class="text-muted" style="font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;">On-Time Dues</small>
+                    </div>
+                    <div class="vr bg-secondary opacity-50"></div>
+                    <div class="text-center">
+                        <h4 class="fw-bold mb-0 text-emerald">24/7</h4>
+                        <small class="text-muted" style="font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;">Gate Security</small>
+                    </div>
+                    <div class="vr bg-secondary opacity-50"></div>
+                    <div class="text-center">
+                        <h4 class="fw-bold mb-0 text-amber">1,200+</h4>
+                        <small class="text-muted" style="font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;">Active Residents</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3 Glowing Role Selection Cards -->
     <div class="row g-4 justify-content-center mb-5">
-        <!-- Resident Card -->
+        <!-- Resident Role Card -->
         <div class="col-md-6 col-lg-4">
-            <div class="landing-role-card">
+            <div class="landing-role-card" style="border-top: 2px solid #10B981 !important;">
                 <div>
                     <div class="landing-role-icon role-icon-resident">
-                        <i class="fa-solid fa-house-chimney-user"></i>
+                        <i class="fa-solid fa-house-laptop"></i>
                     </div>
-                    <h3 class="fw-bold mb-2 text-dark">Resident</h3>
+                    <h3 class="fw-bold mb-2 text-white">Resident Portal</h3>
                     <p class="text-muted small mb-4">
-                        Pay maintenance dues, raise service requests, RSVP community events, and create instant guest passes.
+                        Pay monthly maintenance, generate visitor gate passes, raise service tickets, and cast community votes.
                     </p>
                 </div>
                 <div class="d-grid gap-2">
@@ -42,16 +71,16 @@
             </div>
         </div>
 
-        <!-- Secretary Card -->
+        <!-- Secretary Role Card -->
         <div class="col-md-6 col-lg-4">
-            <div class="landing-role-card">
+            <div class="landing-role-card" style="border-top: 2px solid #06B6D4 !important;">
                 <div>
                     <div class="landing-role-icon role-icon-secretary">
                         <i class="fa-solid fa-user-tie"></i>
                     </div>
-                    <h3 class="fw-bold mb-2 text-dark">Secretary</h3>
+                    <h3 class="fw-bold mb-2 text-white">Secretary Console</h3>
                     <p class="text-muted small mb-4">
-                        Generate monthly billing cycles, oversee society finances, broadcast official notices, and manage roster.
+                        Oversee building accounting, broadcast society circulars, track complaint workflows, and manage member roster.
                     </p>
                 </div>
                 <div class="d-grid gap-2">
@@ -65,16 +94,16 @@
             </div>
         </div>
 
-        <!-- Security Guard Card -->
+        <!-- Security Guard Role Card -->
         <div class="col-md-6 col-lg-4">
-            <div class="landing-role-card">
+            <div class="landing-role-card" style="border-top: 2px solid #F59E0B !important;">
                 <div>
                     <div class="landing-role-icon role-icon-guard">
                         <i class="fa-solid fa-shield-halved"></i>
                     </div>
-                    <h3 class="fw-bold mb-2 text-dark">Gate Security</h3>
+                    <h3 class="fw-bold mb-2 text-white">Gate Security</h3>
                     <p class="text-muted small mb-4">
-                        Verify QR gate passes, record visitor vehicle check-ins, manage delivery logbooks, and protect entry.
+                        Verify instant gate passes, record visitor vehicle entries, checkout visitors, and monitor active campus occupants.
                     </p>
                 </div>
                 <div class="d-grid gap-2">
