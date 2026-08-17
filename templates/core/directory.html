@@ -1,79 +1,100 @@
 {% extends 'base.html' %}
-{% block title %}Emergency Directory - Smart Society{% endblock %}
+{% block title %}Emergency & Society Directory - Smart Society{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2><i class="fa-solid fa-address-book me-2 text-danger"></i>Emergency Directory</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h2 class="mb-1 fw-bold">
+            <i class="fa-solid fa-address-book text-emerald-400 me-2"></i>Emergency & Resident Directory
+        </h2>
+        <p class="text-muted mb-0 small">Direct contacts for assistance, committee, and residents</p>
+    </div>
 </div>
 
-<div class="row g-4">
+<!-- Emergency Contacts -->
+<div class="row g-4 mb-5">
     {% for contact in contacts %}
     <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 border-top border-danger border-4 text-center p-4">
-            {% if contact.photo_url %}
-            <img src="{{ contact.photo_url }}" class="rounded-circle mx-auto mb-3 object-fit-cover shadow-sm border" style="width: 80px; height: 80px;" alt="Photo">
-            {% endif %}
-            <span class="badge bg-danger bg-opacity-10 text-danger border border-danger mb-3 w-auto mx-auto px-3 py-2">{{ contact.role_or_category }}</span>
-            <h5 class="card-title mb-1">{{ contact.name }}</h5>
-            <h3 class="fw-bold mb-3 text-dark">{{ contact.phone }}</h3>
-            <a href="tel:{{ contact.phone }}" class="btn btn-outline-danger w-100 mt-auto"><i class="fa-solid fa-phone me-2"></i>Call Now</a>
-        </div>
-    </div>
-    {% empty %}
-    <div class="col-12 text-center py-5">
-        <p class="text-muted fs-5">No emergency contacts listed yet.</p>
-    </div>
-    {% endfor %}
-</div>
-
-<!-- Essential Services Built-in -->
-<hr class="my-5">
-<h4 class="mb-4 text-muted"><i class="fa-solid fa-truck-medical me-2"></i>National Emergency Numbers</h4>
-<div class="row g-4 mb-5">
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center p-3 border-0 bg-light">
-            <h6 class="text-muted mb-2">Police</h6>
-            <h4 class="fw-bold mb-0">100</h4>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center p-3 border-0 bg-light">
-            <h6 class="text-muted mb-2">Fire Brigade</h6>
-            <h4 class="fw-bold mb-0">101</h4>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center p-3 border-0 bg-light">
-            <h6 class="text-muted mb-2">Ambulance</h6>
-            <h4 class="fw-bold mb-0">102</h4>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center p-3 border-0 bg-light">
-            <h6 class="text-muted mb-2">Women Helpline</h6>
-            <h4 class="fw-bold mb-0">1091</h4>
-        </div>
-    </div>
-</div>
-
-<hr class="my-5">
-<h4 class="mb-4 text-muted"><i class="fa-solid fa-users me-2"></i>Society Residents</h4>
-<div class="row g-4 mb-5">
-    {% for res in residents %}
-    <div class="col-md-3">
-        <div class="card h-100 shadow-sm border-0 text-center p-3 hover-lift">
-            {% if res.profile_photo %}
-            <img src="{{ res.profile_photo.url }}" class="rounded-circle mx-auto mb-3 object-fit-cover shadow-sm border" style="width: 70px; height: 70px;" alt="Photo">
-            {% else %}
-            <i class="fa-solid fa-user-circle fa-4x text-secondary mb-3"></i>
-            {% endif %}
-            <h6 class="fw-bold mb-1">{{ res.get_full_name|default:res.username }}</h6>
-            <small class="text-muted"><i class="fa-solid fa-door-open me-1"></i>{{ res.flat|default:"No Flat" }}</small>
+        <div class="card h-100 p-4 text-center d-flex flex-column justify-content-between">
+            <div>
+                {% if contact.photo_url %}
+                    <img src="{{ contact.photo_url }}" class="rounded-circle mx-auto mb-3 object-fit-cover border border-secondary" style="width: 76px; height: 76px;" alt="Photo">
+                {% else %}
+                    <div class="rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 76px; height: 76px; background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3);">
+                        <i class="fa-solid fa-phone-volume fa-2x"></i>
+                    </div>
+                {% endif %}
+                <span class="badge bg-danger mb-2">{{ contact.role_or_category }}</span>
+                <h5 class="fw-bold text-white mb-1">{{ contact.name }}</h5>
+                <h4 class="fw-bold text-emerald-400 mb-3">{{ contact.phone }}</h4>
+            </div>
+            <a href="tel:{{ contact.phone }}" class="btn btn-outline-danger w-100 mt-2">
+                <i class="fa-solid fa-phone me-2"></i>Call Now
+            </a>
         </div>
     </div>
     {% empty %}
     <div class="col-12 text-center py-4">
-        <p class="text-muted fs-5">No residents registered yet.</p>
+        <p class="text-muted">No custom emergency contacts listed yet.</p>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- National Emergency Numbers -->
+<div class="d-flex align-items-center gap-2 mb-3">
+    <i class="fa-solid fa-truck-medical text-rose-400"></i>
+    <h5 class="fw-bold mb-0 text-white">National Emergency Numbers</h5>
+</div>
+<div class="row g-3 mb-5">
+    <div class="col-6 col-md-3">
+        <div class="item-preview-card text-center p-3">
+            <small class="text-muted text-uppercase fw-bold" style="font-size: 0.72rem; letter-spacing: 0.05em;">Police Control</small>
+            <h3 class="fw-bold text-white mb-0 mt-1">100</h3>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="item-preview-card text-center p-3">
+            <small class="text-muted text-uppercase fw-bold" style="font-size: 0.72rem; letter-spacing: 0.05em;">Fire Brigade</small>
+            <h3 class="fw-bold text-white mb-0 mt-1">101</h3>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="item-preview-card text-center p-3">
+            <small class="text-muted text-uppercase fw-bold" style="font-size: 0.72rem; letter-spacing: 0.05em;">Ambulance</small>
+            <h3 class="fw-bold text-white mb-0 mt-1">102</h3>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="item-preview-card text-center p-3">
+            <small class="text-muted text-uppercase fw-bold" style="font-size: 0.72rem; letter-spacing: 0.05em;">Women Helpline</small>
+            <h3 class="fw-bold text-white mb-0 mt-1">1091</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Society Residents -->
+<div class="d-flex align-items-center gap-2 mb-3">
+    <i class="fa-solid fa-users text-indigo-400"></i>
+    <h5 class="fw-bold mb-0 text-white">Society Residents</h5>
+</div>
+<div class="row g-3 mb-4">
+    {% for res in residents %}
+    <div class="col-6 col-md-3">
+        <div class="card p-3 text-center h-100">
+            {% if res.profile_photo %}
+                <img src="{{ res.profile_photo.url }}" class="rounded-circle mx-auto mb-2 object-fit-cover border border-secondary" style="width: 54px; height: 54px;" alt="Photo">
+            {% else %}
+                <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 54px; height: 54px; background: rgba(99, 102, 241, 0.15); color: #818cf8;">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            {% endif %}
+            <h6 class="fw-bold text-white mb-1 text-truncate">{{ res.get_full_name|default:res.username }}</h6>
+            <small class="badge bg-secondary"><i class="fa-solid fa-door-open me-1 text-indigo-400"></i>Flat {{ res.flat|default:"N/A" }}</small>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center py-4">
+        <p class="text-muted">No residents registered yet.</p>
     </div>
     {% endfor %}
 </div>

@@ -2,54 +2,71 @@
 {% block title %}My Bills - Smart Society{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2><i class="fa-solid fa-receipt me-2 text-primary"></i>My Maintenance Bills</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h2 class="mb-1 fw-bold">
+            <i class="fa-solid fa-receipt text-emerald-400 me-2"></i>My Maintenance Bills
+        </h2>
+        <p class="text-muted mb-0 small">Payment history and outstanding dues</p>
+    </div>
 </div>
 
-<div class="card shadow-sm border-0">
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th>Period</th>
-                        <th>Amount</th>
-                        <th>Due Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for bill in bills %}
-                    <tr>
-                        <td><strong>{{ bill.month }} {{ bill.year }}</strong></td>
-                        <td>₹{{ bill.amount }}
-                            {% if bill.late_fine > 0 %}<br><small class="text-danger">+ ₹{{ bill.late_fine }} late fee</small>{% endif %}
-                        </td>
-                        <td>{{ bill.due_date|date:"d M Y" }}</td>
-                        <td>
-                            {% if bill.is_paid %}
-                                <span class="badge bg-success">Paid</span>
-                            {% else %}
-                                <span class="badge bg-danger">Pending</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if bill.is_paid %}
-                                <a href="{% url 'payment_receipt' bill.payment.id %}" class="btn btn-sm btn-outline-secondary">Receipt</a>
-                            {% else %}
-                                <a href="{% url 'pay_bill' bill.id %}" class="btn btn-sm btn-primary">Pay Now</a>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="5" class="text-center py-4 text-muted">No maintenance bills found for your flat.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">Billing Period</th>
+                    <th>Total Amount</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bill in bills %}
+                <tr>
+                    <td class="ps-4">
+                        <strong class="text-white">{{ bill.month }} {{ bill.year }}</strong>
+                    </td>
+                    <td>
+                        <span class="fw-bold text-white">₹{{ bill.amount }}</span>
+                        {% if bill.late_fine > 0 %}
+                            <br><small class="text-danger">+ ₹{{ bill.late_fine }} late fee</small>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <i class="fa-regular fa-calendar text-muted me-1"></i>{{ bill.due_date|date:"d M Y" }}
+                    </td>
+                    <td>
+                        {% if bill.is_paid %}
+                            <span class="badge bg-success">Paid</span>
+                        {% else %}
+                            <span class="badge bg-danger">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if bill.is_paid %}
+                            <a href="{% url 'payment_receipt' bill.payment.id %}" class="btn btn-sm btn-outline-light py-1 px-3">
+                                <i class="fa-solid fa-file-invoice me-1"></i> Receipt
+                            </a>
+                        {% else %}
+                            <a href="{% url 'pay_bill' bill.id %}" class="btn btn-sm btn-success py-1 px-3">
+                                <i class="fa-solid fa-credit-card me-1"></i> Pay Now
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        <i class="fa-regular fa-circle-check fa-3x mb-3 opacity-50"></i>
+                        <p class="mb-0">No maintenance bills found for your flat.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

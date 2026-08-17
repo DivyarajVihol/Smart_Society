@@ -2,30 +2,38 @@
 {% block title %}Log Visitor - Smart Society{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card p-4 shadow-sm border-top border-dark border-4">
-            <h3 class="mb-4"><i class="fa-solid fa-clipboard-user me-2 text-dark"></i>Log New Entry</h3>
+<div class="row justify-content-center mt-3">
+    <div class="col-md-7 col-lg-6">
+        <div class="card p-4 p-md-5">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="nav-icon-bubble bubble-passes mb-0" style="width: 46px; height: 46px; font-size: 1.2rem;">
+                    <i class="fa-solid fa-clipboard-user"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold mb-0">Log Gate Visitor</h3>
+                    <p class="text-muted small mb-0">Record instant vehicle or pedestrian entry</p>
+                </div>
+            </div>
             
             <form method="post">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Visitor Full Name</label>
-                    <input type="text" name="name" class="form-control" required>
+                    <label class="form-label">Visitor Full Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="e.g. Anand Verma" required>
                 </div>
                 
-                <div class="row mb-3">
+                <div class="row mb-3 g-3">
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">Visiting Flat</label>
+                        <label class="form-label">Visiting Flat Unit</label>
                         <select name="flat" class="form-select" required>
                             <option value="" disabled selected>Select Flat...</option>
                             {% for flat in flats %}
-                                <option value="{{ flat.id }}">{{ flat }}</option>
+                                <option value="{{ flat.id }}">Flat {{ flat }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">Visitor Type</label>
+                        <label class="form-label">Visitor Category</label>
                         <select name="visitor_type" class="form-select" required>
                             {% for key, val in visitor_types %}
                                 <option value="{{ key }}">{{ val }}</option>
@@ -35,11 +43,18 @@
                 </div>
                 
                 <div class="mb-4">
-                    <label class="form-label fw-bold">Purpose of Visit</label>
-                    <input type="text" name="purpose" class="form-control" required placeholder="e.g. Amazon Delivery, Meeting">
+                    <label class="form-label">Purpose of Entry</label>
+                    <input type="text" name="purpose" class="form-control" required placeholder="e.g. Courier Delivery, Food, Electrician, Relative">
                 </div>
                 
-                <button type="submit" class="btn btn-dark w-100 fw-bold"><i class="fa-solid fa-right-to-bracket me-2"></i>Allow Entry</button>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{% url 'dashboard' %}" class="btn btn-outline-light">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Cancel
+                    </a>
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fa-solid fa-door-open me-1"></i> Authorize & Log Entry
+                    </button>
+                </div>
             </form>
         </div>
     </div>

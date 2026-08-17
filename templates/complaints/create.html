@@ -2,21 +2,29 @@
 {% block title %}File Complaint - Smart Society{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-7">
-        <div class="card p-4 shadow-sm border-top border-danger border-4">
-            <h3 class="mb-4"><i class="fa-solid fa-triangle-exclamation text-danger me-2"></i>File a New Complaint</h3>
+<div class="row justify-content-center mt-3">
+    <div class="col-md-8 col-lg-7">
+        <div class="card p-4 p-md-5">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="nav-icon-bubble bubble-complaints mb-0" style="width: 46px; height: 46px; font-size: 1.2rem;">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold mb-0">File a Service Complaint</h3>
+                    <p class="text-muted small mb-0">Notify the society committee of maintenance issues</p>
+                </div>
+            </div>
             
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Title</label>
-                    <input type="text" name="title" class="form-control" placeholder="Brief issue description" required>
+                    <label class="form-label">Complaint Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="E.g., Water leakage in corridor / Lift not functioning" required>
                 </div>
                 
-                <div class="row mb-3">
+                <div class="row mb-3 g-3">
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">Category</label>
+                        <label class="form-label">Category</label>
                         <select name="category" class="form-select" required>
                             {% for key, name in categories %}
                                 <option value="{{ key }}">{{ name }}</option>
@@ -24,17 +32,24 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">Attach Photo (Optional)</label>
+                        <label class="form-label">Attach Photo (Optional)</label>
                         <input type="file" name="photo" class="form-control" accept="image/*">
                     </div>
                 </div>
                 
                 <div class="mb-4">
-                    <label class="form-label fw-bold">Detailed Description</label>
-                    <textarea name="description" rows="4" class="form-control" required placeholder="Please provide location and details..."></textarea>
+                    <label class="form-label">Detailed Description</label>
+                    <textarea name="description" rows="4" class="form-control" required placeholder="Describe the location, severity, and details of the problem..."></textarea>
                 </div>
                 
-                <button type="submit" class="btn btn-danger w-100 fw-bold">Submit Complaint</button>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{% url 'complaints:list' %}" class="btn btn-outline-light">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Cancel
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa-solid fa-paper-plane me-1"></i> Submit Complaint
+                    </button>
+                </div>
             </form>
         </div>
     </div>

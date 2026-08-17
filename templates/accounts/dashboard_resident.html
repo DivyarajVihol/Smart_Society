@@ -2,147 +2,182 @@
 {% block title %}Resident Dashboard - Smart Society{% endblock %}
 
 {% block content %}
+<!-- Welcome Banner Header -->
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h2 class="mb-1 fw-bold">Welcome back, {{ user.get_full_name|default:user.username }}</h2>
+        <p class="text-muted mb-0 small">
+            <i class="fa-solid fa-location-dot text-indigo-400 me-1"></i>
+            Flat {{ user.flat|default:"Not Assigned" }} &bull; Resident Dashboard
+        </p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{% url 'visitors:create_gate_pass' %}" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-ticket me-1"></i> Quick Pass
+        </a>
+        <a href="{% url 'complaints:create' %}" class="btn btn-outline-light btn-sm">
+            <i class="fa-solid fa-plus me-1"></i> New Complaint
+        </a>
+    </div>
+</div>
 
-<!-- Main Content: Nav Cards | Chart + Info -->
+<!-- Main Grid -->
 <div class="row g-4">
-
-    <!-- LEFT: 2x3 Navigation Card Grid (5 nav + 1 bill summary) -->
+    <!-- LEFT: 2x3 Action Card Grid -->
     <div class="col-lg-6">
         <div class="row row-cols-2 g-3">
-
+            <!-- Notices -->
             <div class="col">
-                <a href="{% url 'core:notices' %}" class="text-decoration-none">
-                    <div class="card h-100 text-center p-3 nav-card hover-lift nc-notices" style="min-height: 140px;">
-                        <span style="font-size: 2.6rem;">📢</span>
-                        <h6 class="text-white fw-bold mt-2 mb-1">Notices</h6>
-                        <p class="text-white-50 small mb-0" style="font-size:0.72rem;">Latest announcements</p>
+                <a href="{% url 'core:notices' %}" class="text-decoration-none d-block h-100">
+                    <div class="nav-card-modern" style="--card-glow: rgba(2, 132, 199, 0.2); --card-border-glow: rgba(2, 132, 199, 0.4);">
+                        <div class="nav-icon-bubble bubble-notices">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <h6 class="nav-card-title">Notices</h6>
+                        <p class="nav-card-desc">Society announcements</p>
                     </div>
                 </a>
             </div>
 
+            <!-- Complaints -->
             <div class="col">
-                <a href="{% url 'complaints:list' %}" class="text-decoration-none">
-                    <div class="card h-100 text-center p-3 nav-card hover-lift nc-complaints" style="min-height: 140px;">
-                        <span style="font-size: 2.6rem;">🛠️</span>
-                        <h6 class="text-white fw-bold mt-2 mb-1">Complaints</h6>
-                        <p class="text-white-50 small mb-0" style="font-size:0.72rem;">File & track requests</p>
+                <a href="{% url 'complaints:list' %}" class="text-decoration-none d-block h-100">
+                    <div class="nav-card-modern" style="--card-glow: rgba(244, 63, 94, 0.2); --card-border-glow: rgba(244, 63, 94, 0.4);">
+                        <div class="nav-icon-bubble bubble-complaints">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h6 class="nav-card-title">Complaints</h6>
+                        <p class="nav-card-desc">Track service requests</p>
                     </div>
                 </a>
             </div>
 
+            <!-- Events -->
             <div class="col">
-                <a href="{% url 'events:events_list' %}" class="text-decoration-none">
-                    <div class="card h-100 text-center p-3 nav-card hover-lift nc-events" style="min-height: 140px;">
-                        <span style="font-size: 2.6rem;">📅</span>
-                        <h6 class="text-white fw-bold mt-2 mb-1">Events</h6>
-                        <p class="text-white-50 small mb-0" style="font-size:0.72rem;">Discover & RSVP events</p>
+                <a href="{% url 'events:events_list' %}" class="text-decoration-none d-block h-100">
+                    <div class="nav-card-modern" style="--card-glow: rgba(139, 92, 246, 0.2); --card-border-glow: rgba(139, 92, 246, 0.4);">
+                        <div class="nav-icon-bubble bubble-events">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <h6 class="nav-card-title">Events</h6>
+                        <p class="nav-card-desc">Community gatherings</p>
                     </div>
                 </a>
             </div>
 
+            <!-- Directory -->
             <div class="col">
-                <a href="{% url 'core:directory' %}" class="text-decoration-none">
-                    <div class="card h-100 text-center p-3 nav-card hover-lift nc-directory" style="min-height: 140px;">
-                        <span style="font-size: 2.6rem;">👥</span>
-                        <h6 class="text-white fw-bold mt-2 mb-1">Directory</h6>
-                        <p class="text-white-50 small mb-0" style="font-size:0.72rem;">Residents & contacts</p>
+                <a href="{% url 'core:directory' %}" class="text-decoration-none d-block h-100">
+                    <div class="nav-card-modern" style="--card-glow: rgba(13, 148, 136, 0.2); --card-border-glow: rgba(13, 148, 136, 0.4);">
+                        <div class="nav-icon-bubble bubble-directory">
+                            <i class="fa-solid fa-address-book"></i>
+                        </div>
+                        <h6 class="nav-card-title">Directory</h6>
+                        <p class="nav-card-desc">Emergency & neighbours</p>
                     </div>
                 </a>
             </div>
 
+            <!-- Gate Passes -->
             <div class="col">
-                <a href="{% url 'visitors:my_gate_passes' %}" class="text-decoration-none">
-                    <div class="card h-100 text-center p-3 nav-card hover-lift nc-passes" style="min-height: 140px;">
-                        <span style="font-size: 2.6rem;">🎟️</span>
-                        <h6 class="text-white fw-bold mt-2 mb-1">Gate Passes</h6>
-                        <p class="text-white-50 small mb-0" style="font-size:0.72rem;">Manage guest entry</p>
+                <a href="{% url 'visitors:my_gate_passes' %}" class="text-decoration-none d-block h-100">
+                    <div class="nav-card-modern" style="--card-glow: rgba(245, 158, 11, 0.2); --card-border-glow: rgba(245, 158, 11, 0.4);">
+                        <div class="nav-icon-bubble bubble-passes">
+                            <i class="fa-solid fa-id-badge"></i>
+                        </div>
+                        <h6 class="nav-card-title">Gate Passes</h6>
+                        <p class="nav-card-desc">Manage guest entries</p>
                     </div>
                 </a>
             </div>
 
-            <!-- 6th slot: Bill Status mini-card -->
+            <!-- My Bills -->
             <div class="col">
-                <a href="{% url 'my_bills' %}" class="text-decoration-none">
-                    <div class="card h-100 text-center p-3 nav-card hover-lift nc-bills" style="min-height: 140px;">
-                        <span style="font-size: 2.6rem;">💰</span>
-                        <h6 class="text-white fw-bold mt-2 mb-1">My Bills</h6>
-                        <p class="text-white-50 small mb-0" style="font-size:0.72rem;">
+                <a href="{% url 'my_bills' %}" class="text-decoration-none d-block h-100">
+                    <div class="nav-card-modern" style="--card-glow: rgba(16, 185, 129, 0.2); --card-border-glow: rgba(16, 185, 129, 0.4);">
+                        <div class="nav-icon-bubble bubble-bills">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+                        <h6 class="nav-card-title">My Bills</h6>
+                        <p class="nav-card-desc">
                             {% if my_unpaid_bills_count > 0 %}
-                                {{ my_unpaid_bills_count }} pending due
+                                <span class="text-danger fw-semibold">{{ my_unpaid_bills_count }} pending bill{{ my_unpaid_bills_count|pluralize }}</span>
                             {% else %}
-                                All clear! ✅
+                                <span class="text-success fw-semibold">All dues paid</span>
                             {% endif %}
                         </p>
                     </div>
                 </a>
             </div>
-
         </div>
     </div>
 
-    <!-- RIGHT: Chart + Sections -->
+    <!-- RIGHT: Notices & Events Feeds -->
     <div class="col-lg-6 d-flex flex-column gap-4">
-
         <!-- Recent Notices -->
-        <div class="card border-0 shadow-sm p-4" style="border-radius: 16px;">
+        <div class="card p-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold text-muted text-uppercase mb-0" style="letter-spacing:0.06em; font-size:0.78rem;">📋 Recent Notices</h6>
-                <a href="{% url 'core:notices' %}" class="btn btn-sm btn-outline-primary" style="font-size:0.75rem; border-radius:20px;">View All</a>
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-bullhorn text-sky-400"></i>
+                    <h6 class="fw-bold text-uppercase mb-0 small text-muted" style="letter-spacing: 0.05em;">Recent Notices</h6>
+                </div>
+                <a href="{% url 'core:notices' %}" class="btn btn-outline-primary btn-sm py-1 px-2" style="font-size: 0.75rem;">View All</a>
             </div>
             <div class="d-flex flex-column gap-2">
                 {% for notice in recent_notices %}
-                <div class="d-flex align-items-start gap-3 p-2 rounded-3" style="background:#f9f9fb;">
+                <div class="item-preview-card d-flex align-items-start gap-3">
                     <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
-                         style="width:36px;height:36px;background:linear-gradient(135deg,#0093E9,#80D0C7);color:white;">
-                        <i class="fa-solid fa-bullhorn" style="font-size:0.8rem;"></i>
+                         style="width: 38px; height: 38px; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white;">
+                        <i class="fa-solid fa-scroll fa-sm"></i>
                     </div>
                     <div class="flex-grow-1 overflow-hidden">
-                        <p class="fw-semibold mb-0 text-truncate" style="font-size:0.85rem;">{{ notice.title }}</p>
-                        <p class="text-muted mb-0" style="font-size:0.72rem;">
-                            <span class="badge bg-secondary-subtle text-secondary me-1" style="font-size:0.65rem;">{{ notice.category }}</span>
+                        <p class="fw-semibold mb-0 text-white text-truncate" style="font-size: 0.88rem;">{{ notice.title }}</p>
+                        <p class="text-muted mb-0 small" style="font-size: 0.75rem;">
+                            <span class="badge bg-secondary me-1 py-0 px-2" style="font-size: 0.65rem;">{{ notice.get_category_display }}</span>
                             {{ notice.created_at|date:"M d, Y" }}
                         </p>
                     </div>
                 </div>
                 {% empty %}
-                <div class="text-center py-3 text-muted">
-                    <i class="fa-regular fa-bell-slash fa-2x mb-2"></i>
-                    <p class="mb-0" style="font-size:0.85rem;">No notices yet.</p>
+                <div class="text-center py-4 text-muted">
+                    <i class="fa-regular fa-bell-slash fa-2x mb-2 opacity-50"></i>
+                    <p class="mb-0 small">No recent notices published.</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
         <!-- Upcoming Events -->
-        <div class="card border-0 shadow-sm p-4" style="border-radius: 16px;">
+        <div class="card p-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold text-muted text-uppercase mb-0" style="letter-spacing:0.06em; font-size:0.78rem;">🎉 Upcoming Events</h6>
-                <a href="{% url 'events:events_list' %}" class="btn btn-sm btn-outline-success" style="font-size:0.75rem; border-radius:20px;">View All</a>
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-calendar-days text-purple-400"></i>
+                    <h6 class="fw-bold text-uppercase mb-0 small text-muted" style="letter-spacing: 0.05em;">Upcoming Events</h6>
+                </div>
+                <a href="{% url 'events:events_list' %}" class="btn btn-outline-success btn-sm py-1 px-2" style="font-size: 0.75rem;">View All</a>
             </div>
             <div class="d-flex flex-column gap-2">
                 {% for event in upcoming_events %}
-                <div class="d-flex align-items-center gap-3 p-2 rounded-3" style="background:#f9f9fb;">
-                    <div class="text-center flex-shrink-0 rounded-2 p-1" style="background:linear-gradient(135deg,#4776E6,#8E54E9);min-width:44px;">
-                        <p class="text-white fw-bold mb-0" style="font-size:1rem; line-height:1.1;">{{ event.date|date:"d" }}</p>
-                        <p class="text-white-50 mb-0" style="font-size:0.65rem;">{{ event.date|date:"M" }}</p>
+                <div class="item-preview-card d-flex align-items-center gap-3">
+                    <div class="date-badge-box">
+                        <span class="date-badge-day">{{ event.date|date:"d" }}</span>
+                        <span class="date-badge-month">{{ event.date|date:"M" }}</span>
                     </div>
-                    <div class="overflow-hidden">
-                        <p class="fw-semibold mb-0 text-truncate" style="font-size:0.85rem;">{{ event.title }}</p>
-                        <p class="text-muted mb-0" style="font-size:0.72rem;"><i class="fa-solid fa-location-dot me-1"></i>{{ event.venue }}</p>
+                    <div class="overflow-hidden flex-grow-1">
+                        <p class="fw-semibold mb-0 text-white text-truncate" style="font-size: 0.88rem;">{{ event.title }}</p>
+                        <p class="text-muted mb-0 small" style="font-size: 0.75rem;">
+                            <i class="fa-solid fa-location-dot me-1 text-muted"></i>{{ event.venue }}
+                        </p>
                     </div>
                 </div>
                 {% empty %}
-                <div class="text-center py-3 text-muted">
-                    <i class="fa-regular fa-calendar-xmark fa-2x mb-2"></i>
-                    <p class="mb-0" style="font-size:0.85rem;">No upcoming events.</p>
+                <div class="text-center py-4 text-muted">
+                    <i class="fa-regular fa-calendar-xmark fa-2x mb-2 opacity-50"></i>
+                    <p class="mb-0 small">No upcoming events scheduled.</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
-
     </div>
 </div>
-
 {% endblock %}
-
-

@@ -1,54 +1,90 @@
 {% extends 'base.html' %}
-{% block title %}Welcome - Smart Society{% endblock %}
+{% block title %}Welcome to Smart Society - Modern Community Platform{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center mt-5">
-    <div class="col-12 text-center mb-5">
-        <h1 class="display-5 fw-bold text-primary">Welcome to Smart Society</h1>
-        <p class="lead text-muted">Please select your role to continue.</p>
-    </div>
-
-    <!-- Resident Card -->
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm border-0 border-top border-primary border-4 text-center">
-            <div class="card-body p-4">
-                <i class="fa-solid fa-house-user fa-3x text-primary mb-3"></i>
-                <h3 class="card-title">Resident</h3>
-                <p class="text-muted">Access your bills, file complaints, RSVP to events, and generate gate passes.</p>
-            </div>
-            <div class="card-footer bg-white border-0 pb-4 d-grid gap-2 custom-footer">
-                <a href="{% url 'role_login' 'resident' %}" class="btn btn-primary">Login</a>
-                <a href="{% url 'role_signup' 'resident' %}" class="btn btn-outline-primary">Sign Up</a>
-            </div>
+<div class="landing-hero-section">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center mb-5">
+            <span class="landing-pill">
+                <i class="fa-solid fa-sparkles"></i> Next-Gen Housing Society Platform
+            </span>
+            <h1 class="display-4 fw-extrabold mb-3">
+                Smart Living, <span class="brand-name-highlight">Effortlessly Managed</span>
+            </h1>
+            <p class="lead text-muted mx-auto" style="max-width: 650px;">
+                Connect residents, committee executives, and gate security seamlessly with real-time gate passes, online billing, maintenance complaints, and instant notices.
+            </p>
         </div>
     </div>
 
-    <!-- Secretary Card -->
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm border-0 border-top border-success border-4 text-center">
-            <div class="card-body p-4">
-                <i class="fa-solid fa-user-tie fa-3x text-success mb-3"></i>
-                <h3 class="card-title">Secretary</h3>
-                <p class="text-muted">Manage the society, generate bills, resolve complaints, and post notices.</p>
-            </div>
-            <div class="card-footer bg-white border-0 pb-4 d-grid gap-2 custom-footer">
-                <a href="{% url 'role_login' 'secretary' %}" class="btn btn-success">Login</a>
-                <a href="{% url 'role_signup' 'secretary' %}" class="btn btn-outline-success">Sign Up</a>
+    <!-- Role Selection Cards -->
+    <div class="row g-4 justify-content-center mb-5">
+        <!-- Resident Card -->
+        <div class="col-md-6 col-lg-4">
+            <div class="landing-role-card" style="--card-glow-color: rgba(16, 185, 129, 0.35);">
+                <div>
+                    <div class="landing-role-icon role-icon-resident">
+                        <i class="fa-solid fa-house-chimney-user"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">Resident</h3>
+                    <p class="text-muted small mb-4">
+                        Pay maintenance dues, raise service requests, RSVP community events, and create instant guest passes.
+                    </p>
+                </div>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'role_login' 'resident' %}" class="btn btn-success">
+                        <i class="fa-solid fa-right-to-bracket me-1"></i> Resident Sign In
+                    </a>
+                    <a href="{% url 'role_signup' 'resident' %}" class="btn btn-outline-light">
+                        <i class="fa-solid fa-user-plus me-1"></i> New Registration
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Security Guard Card -->
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm border-0 border-top border-dark border-4 text-center">
-            <div class="card-body p-4">
-                <i class="fa-solid fa-shield-halved fa-3x text-dark mb-3"></i>
-                <h3 class="card-title">Security Guard</h3>
-                <p class="text-muted">Manage the main gate, verify gate passes, and log all visitors.</p>
+        <!-- Secretary Card -->
+        <div class="col-md-6 col-lg-4">
+            <div class="landing-role-card" style="--card-glow-color: rgba(139, 92, 246, 0.35);">
+                <div>
+                    <div class="landing-role-icon role-icon-secretary">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">Secretary</h3>
+                    <p class="text-muted small mb-4">
+                        Generate monthly billing cycles, oversee society finances, broadcast official notices, and manage roster.
+                    </p>
+                </div>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'role_login' 'secretary' %}" class="btn btn-primary">
+                        <i class="fa-solid fa-right-to-bracket me-1"></i> Secretary Sign In
+                    </a>
+                    <a href="{% url 'role_signup' 'secretary' %}" class="btn btn-outline-light">
+                        <i class="fa-solid fa-user-plus me-1"></i> Admin Signup
+                    </a>
+                </div>
             </div>
-            <div class="card-footer bg-white border-0 pb-4 d-grid gap-2 custom-footer">
-                <a href="{% url 'role_login' 'guard' %}" class="btn btn-dark">Login</a>
-                <a href="{% url 'role_signup' 'guard' %}" class="btn btn-outline-dark">Sign Up</a>
+        </div>
+
+        <!-- Security Guard Card -->
+        <div class="col-md-6 col-lg-4">
+            <div class="landing-role-card" style="--card-glow-color: rgba(245, 158, 11, 0.35);">
+                <div>
+                    <div class="landing-role-icon role-icon-guard">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">Gate Security</h3>
+                    <p class="text-muted small mb-4">
+                        Verify QR gate passes, record visitor vehicle check-ins, manage delivery logbooks, and protect entry.
+                    </p>
+                </div>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'role_login' 'guard' %}" class="btn btn-warning">
+                        <i class="fa-solid fa-right-to-bracket me-1"></i> Security Sign In
+                    </a>
+                    <a href="{% url 'role_signup' 'guard' %}" class="btn btn-outline-light">
+                        <i class="fa-solid fa-user-plus me-1"></i> Staff Signup
+                    </a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,44 +1,50 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Login - {{ role_title }}{% endblock %}
+{% block title %}Sign In - {{ role_title }} | Smart Society{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center mt-5">
-    <div class="col-md-5">
-        <div class="card shadow-sm border-0">
-            <div class="card-body p-5">
-                <div class="text-center mb-4">
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6 col-lg-5">
+        <div class="card p-4 p-md-5">
+            <div class="text-center mb-4">
+                <div class="landing-role-icon mb-3 {% if role_param == 'secretary' %}role-icon-secretary{% elif role_param == 'resident' %}role-icon-resident{% else %}role-icon-guard{% endif %}">
                     {% if role_param == 'secretary' %}
-                        <i class="fa-solid fa-user-tie fa-3x text-success mb-3"></i>
+                        <i class="fa-solid fa-user-tie"></i>
                     {% elif role_param == 'resident' %}
-                        <i class="fa-solid fa-house-user fa-3x text-primary mb-3"></i>
+                        <i class="fa-solid fa-house-chimney-user"></i>
                     {% else %}
-                        <i class="fa-solid fa-shield-halved fa-3x text-dark mb-3"></i>
+                        <i class="fa-solid fa-shield-halved"></i>
                     {% endif %}
-                    <h2>{{ role_title }} Login</h2>
-                    <p class="text-muted">Welcome back to Smart Society</p>
                 </div>
+                <h2 class="fw-bold mb-1">{{ role_title }} Portal</h2>
+                <p class="text-muted small">Sign in to your Smart Society account</p>
+            </div>
+            
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
                 
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    
-                    <div class="d-grid mt-4">
-                        {% if role_param == 'secretary' %}
-                            <button type="submit" class="btn btn-success btn-lg">Login</button>
-                        {% elif role_param == 'resident' %}
-                            <button type="submit" class="btn btn-primary btn-lg">Login</button>
-                        {% else %}
-                            <button type="submit" class="btn btn-dark btn-lg">Login</button>
-                        {% endif %}
-                    </div>
-                </form>
-                
-                <div class="text-center mt-4">
-                    <p class="mb-0">Don't have an account? <a href="{% url 'role_signup' role_param %}">Sign up here</a></p>
-                    <p class="mt-2 text-muted small"><a href="{% url 'landing' %}" class="text-decoration-none"><i class="fa-solid fa-arrow-left me-1"></i>Back to Role Selection</a></p>
+                <div class="d-grid mt-4">
+                    {% if role_param == 'secretary' %}
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fa-solid fa-right-to-bracket me-1"></i> Secretary Sign In
+                        </button>
+                    {% elif role_param == 'resident' %}
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fa-solid fa-right-to-bracket me-1"></i> Resident Sign In
+                        </button>
+                    {% else %}
+                        <button type="submit" class="btn btn-warning btn-lg">
+                            <i class="fa-solid fa-right-to-bracket me-1"></i> Security Sign In
+                        </button>
+                    {% endif %}
                 </div>
+            </form>
+            
+            <div class="text-center mt-4">
+                <p class="mb-2 text-muted small">Don't have an account? <a href="{% url 'role_signup' role_param %}" class="fw-semibold">Register here</a></p>
+                <p class="mb-0 small"><a href="{% url 'landing' %}" class="text-muted"><i class="fa-solid fa-arrow-left me-1"></i>Back to Role Selection</a></p>
             </div>
         </div>
     </div>

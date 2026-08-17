@@ -2,42 +2,56 @@
 {% block title %}Notice Board - Smart Society{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2><i class="fa-solid fa-bullhorn me-2 text-warning"></i>Notice Board</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h2 class="mb-1 fw-bold">
+            <i class="fa-solid fa-bullhorn text-sky-400 me-2"></i>Official Notice Board
+        </h2>
+        <p class="text-muted mb-0 small">Society announcements, maintenance schedules, and circulars</p>
+    </div>
     {% if user.is_secretary %}
-        <a href="{% url 'core:create_notice' %}" class="btn btn-warning"><i class="fa-solid fa-plus me-2"></i>Post Notice</a>
+        <a href="{% url 'core:create_notice' %}" class="btn btn-primary">
+            <i class="fa-solid fa-plus me-1"></i> Post New Notice
+        </a>
     {% endif %}
 </div>
 
 <div class="row g-4">
     {% for notice in notices %}
     <div class="col-md-6">
-        <div class="card h-100 shadow-sm border-start border-warning border-4">
-            <div class="card-body">
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="badge bg-secondary">{{ notice.get_category_display }}</span>
-                    <small class="text-muted"><i class="fa-regular fa-clock me-1"></i>{{ notice.created_at|date:"d M Y" }}</small>
+        <div class="card h-100 p-4 d-flex flex-column justify-content-between">
+            <div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="badge bg-info">{{ notice.get_category_display }}</span>
+                    <small class="text-muted">
+                        <i class="fa-regular fa-clock me-1"></i>{{ notice.created_at|date:"d M Y" }}
+                    </small>
                 </div>
-                <h5 class="card-title">{{ notice.title }}</h5>
-                <p class="card-text text-muted">{{ notice.description|linebreaks }}</p>
+                <h5 class="fw-bold text-white mb-2">{{ notice.title }}</h5>
+                <p class="card-text text-secondary mb-3">{{ notice.description|linebreaks }}</p>
             </div>
-            <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center text-muted">
-                <small>By 
+            
+            <div class="card-footer bg-transparent p-0 pt-3 d-flex justify-content-between align-items-center border-top">
+                <small class="text-muted">
+                    <i class="fa-solid fa-user-tie me-1"></i>
                     {% if notice.created_by %}
                         {{ notice.created_by.get_full_name|default:notice.created_by.username }}
                     {% else %}
-                        Society Committee
+                        Management Committee
                     {% endif %}
                 </small>
                 {% if notice.attachment %}
-                    <a href="{{ notice.attachment.url }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-paperclip me-1"></i>View Attachment</a>
+                    <a href="{{ notice.attachment.url }}" target="_blank" class="btn btn-sm btn-outline-primary py-1 px-2" style="font-size:0.78rem;">
+                        <i class="fa-solid fa-paperclip me-1"></i> Attachment
+                    </a>
                 {% endif %}
             </div>
         </div>
     </div>
     {% empty %}
     <div class="col-12 text-center py-5">
-        <p class="text-muted fs-5">No notices posted yet.</p>
+        <i class="fa-regular fa-bell-slash fa-3x text-muted mb-3 opacity-50"></i>
+        <p class="text-muted fs-5">No official notices posted yet.</p>
     </div>
     {% endfor %}
 </div>
